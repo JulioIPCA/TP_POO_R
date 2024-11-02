@@ -10,40 +10,18 @@ namespace TP_POO_R.Views
             InitializeComponent();
         }
 
-        private void btnContrato_Click(object sender, EventArgs e)
+        private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            ContratoForm contratoForm = new ContratoForm();
-            contratoForm.ShowDialog();
+            // Exibir botões adicionais para adicionar diferentes tipos de itens
+            AdicionarForm adicionarForm = new AdicionarForm();
+            adicionarForm.ShowDialog();
         }
 
-        private void btnDespesa_Click(object sender, EventArgs e)
+        private void btnConsultar_Click(object sender, EventArgs e)
         {
-            DespesaForm despesaForm = new DespesaForm();
-            despesaForm.ShowDialog();
-        }
-
-        private void btnImovel_Click(object sender, EventArgs e)
-        {
-            ImovelForm imovelForm = new ImovelForm();
-            imovelForm.ShowDialog();
-        }
-
-        private void btnInquilino_Click(object sender, EventArgs e)
-        {
-            InquilinoForm inquilinoForm = new InquilinoForm();
-            inquilinoForm.ShowDialog();
-        }
-
-        private void btnRecibo_Click(object sender, EventArgs e)
-        {
-            ReciboForm reciboForm = new ReciboForm();
-            reciboForm.ShowDialog();
-        }
-
-        private void btnSenhorio_Click(object sender, EventArgs e)
-        {
-            SenhorioForm senhorioForm = new SenhorioForm();
-            senhorioForm.ShowDialog();
+            // Abrir o formulário de consulta
+            ConsultarForm consultarForm = new ConsultarForm();
+            consultarForm.ShowDialog();
         }
     }
 }

@@ -33,88 +33,89 @@ namespace TP_POO_R.Views
 
         private void InitializeComponent()
         {
-            this.txtDescricao = new System.Windows.Forms.TextBox();
-            this.txtValor = new System.Windows.Forms.TextBox();
-            this.dtpData = new System.Windows.Forms.DateTimePicker();
-            this.btnSalvar = new System.Windows.Forms.Button();
-            this.lblDescricao = new System.Windows.Forms.Label();
-            this.lblValor = new System.Windows.Forms.Label();
-            this.lblData = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // lblDescricao
-            // 
-            this.lblDescricao.AutoSize = true;
-            this.lblDescricao.Location = new System.Drawing.Point(12, 12);
-            this.lblDescricao.Name = "lblDescricao";
-            this.lblDescricao.Size = new System.Drawing.Size(55, 13);
-            this.lblDescricao.TabIndex = 5;
-            this.lblDescricao.Text = "Descrição";
+            txtDescricao = new TextBox();
+            txtValor = new TextBox();
+            dtpData = new DateTimePicker();
+            btnSalvar = new Button();
+            lblDescricao = new Label();
+            lblValor = new Label();
+            lblData = new Label();
+            SuspendLayout();
             // 
             // txtDescricao
             // 
-            this.txtDescricao.Location = new System.Drawing.Point(100, 12);
-            this.txtDescricao.Name = "txtDescricao";
-            this.txtDescricao.Size = new System.Drawing.Size(200, 20);
-            this.txtDescricao.TabIndex = 0;
-            // 
-            // lblValor
-            // 
-            this.lblValor.AutoSize = true;
-            this.lblValor.Location = new System.Drawing.Point(12, 38);
-            this.lblValor.Name = "lblValor";
-            this.lblValor.Size = new System.Drawing.Size(31, 13);
-            this.lblValor.TabIndex = 6;
-            this.lblValor.Text = "Valor";
+            txtDescricao.Location = new Point(100, 12);
+            txtDescricao.Name = "txtDescricao";
+            txtDescricao.Size = new Size(200, 23);
+            txtDescricao.TabIndex = 0;
             // 
             // txtValor
             // 
-            this.txtValor.Location = new System.Drawing.Point(100, 38);
-            this.txtValor.Name = "txtValor";
-            this.txtValor.Size = new System.Drawing.Size(100, 20);
-            this.txtValor.TabIndex = 1;
-            // 
-            // lblData
-            // 
-            this.lblData.AutoSize = true;
-            this.lblData.Location = new System.Drawing.Point(12, 64);
-            this.lblData.Name = "lblData";
-            this.lblData.Size = new System.Drawing.Size(30, 13);
-            this.lblData.TabIndex = 7;
-            this.lblData.Text = "Data";
+            txtValor.Location = new Point(100, 38);
+            txtValor.Name = "txtValor";
+            txtValor.Size = new Size(100, 23);
+            txtValor.TabIndex = 1;
             // 
             // dtpData
             // 
-            this.dtpData.Location = new System.Drawing.Point(100, 64);
-            this.dtpData.Name = "dtpData";
-            this.dtpData.Size = new System.Drawing.Size(200, 20);
-            this.dtpData.TabIndex = 2;
+            dtpData.Location = new Point(100, 64);
+            dtpData.Name = "dtpData";
+            dtpData.Size = new Size(200, 23);
+            dtpData.TabIndex = 2;
             // 
             // btnSalvar
             // 
-            this.btnSalvar.Location = new System.Drawing.Point(12, 90);
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(75, 23);
-            this.btnSalvar.TabIndex = 3;
-            this.btnSalvar.Text = "Salvar";
-            this.btnSalvar.UseVisualStyleBackColor = true;
-            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            btnSalvar.Location = new Point(12, 90);
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Size = new Size(75, 23);
+            btnSalvar.TabIndex = 3;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
+            // 
+            // lblDescricao
+            // 
+            lblDescricao.AutoSize = true;
+            lblDescricao.Location = new Point(12, 12);
+            lblDescricao.Name = "lblDescricao";
+            lblDescricao.Size = new Size(58, 15);
+            lblDescricao.TabIndex = 5;
+            lblDescricao.Text = "Descrição";
+            // 
+            // lblValor
+            // 
+            lblValor.AutoSize = true;
+            lblValor.Location = new Point(12, 38);
+            lblValor.Name = "lblValor";
+            lblValor.Size = new Size(33, 15);
+            lblValor.TabIndex = 6;
+            lblValor.Text = "Valor";
+            // 
+            // lblData
+            // 
+            lblData.AutoSize = true;
+            lblData.Location = new Point(12, 64);
+            lblData.Name = "lblData";
+            lblData.Size = new Size(31, 15);
+            lblData.TabIndex = 7;
+            lblData.Text = "Data";
             // 
             // DespesaForm
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 130);
-            this.Controls.Add(this.lblData);
-            this.Controls.Add(this.lblValor);
-            this.Controls.Add(this.lblDescricao);
-            this.Controls.Add(this.btnSalvar);
-            this.Controls.Add(this.dtpData);
-            this.Controls.Add(this.txtValor);
-            this.Controls.Add(this.txtDescricao);
-            this.Name = "DespesaForm";
-            this.Text = "Adicionar Despesa";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(646, 416);
+            Controls.Add(lblData);
+            Controls.Add(lblValor);
+            Controls.Add(lblDescricao);
+            Controls.Add(btnSalvar);
+            Controls.Add(dtpData);
+            Controls.Add(txtValor);
+            Controls.Add(txtDescricao);
+            Name = "DespesaForm";
+            Text = "Adicionar Despesa";
+            ResumeLayout(false);
+            PerformLayout();
         }
     }
 }
