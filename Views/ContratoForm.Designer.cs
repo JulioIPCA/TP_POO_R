@@ -1,29 +1,12 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace TP_POO_R.Views
+﻿namespace TP_POO_R.Views
 {
-    partial class ContratoForm : Form
+    partial class ContratoForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private MaterialSkin.Controls.MaterialRaisedButton btnAdicionar;
+        private MaterialSkin.Controls.MaterialRaisedButton btnRemover;
+        private System.Windows.Forms.DataGridView dataGridView;
 
-        private System.Windows.Forms.TextBox txtImovelId;
-        private System.Windows.Forms.TextBox txtInquilinoId;
-        private System.Windows.Forms.DateTimePicker dtpDataInicio;
-        private System.Windows.Forms.DateTimePicker dtpDataFim;
-        private System.Windows.Forms.Button btnSalvar;
-        private System.Windows.Forms.Label lblImovelId;
-        private System.Windows.Forms.Label lblInquilinoId;
-        private System.Windows.Forms.Label lblDataInicio;
-        private System.Windows.Forms.Label lblDataFim;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -33,112 +16,65 @@ namespace TP_POO_R.Views
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
+
         private void InitializeComponent()
         {
-            txtImovelId = new TextBox();
-            txtInquilinoId = new TextBox();
-            dtpDataInicio = new DateTimePicker();
-            dtpDataFim = new DateTimePicker();
-            btnSalvar = new Button();
-            lblImovelId = new Label();
-            lblInquilinoId = new Label();
-            lblDataInicio = new Label();
-            lblDataFim = new Label();
+            btnAdicionar = new MaterialSkin.Controls.MaterialRaisedButton();
+            btnRemover = new MaterialSkin.Controls.MaterialRaisedButton();
+            dataGridView = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
-            // txtImovelId
+            // btnAdicionar
             // 
-            txtImovelId.Location = new Point(100, 12);
-            txtImovelId.Name = "txtImovelId";
-            txtImovelId.Size = new Size(200, 23);
-            txtImovelId.TabIndex = 0;
+            btnAdicionar.Depth = 0;
+            btnAdicionar.Location = new Point(367, 92);
+            btnAdicionar.MouseState = MaterialSkin.MouseState.HOVER;
+            btnAdicionar.Name = "btnAdicionar";
+            btnAdicionar.Primary = true;
+            btnAdicionar.Size = new Size(100, 36);
+            btnAdicionar.TabIndex = 0;
+            btnAdicionar.Text = "Adicionar";
+            btnAdicionar.UseVisualStyleBackColor = true;
+            btnAdicionar.Click += btnAdicionar_Click;
             // 
-            // txtInquilinoId
+            // btnRemover
             // 
-            txtInquilinoId.Location = new Point(100, 38);
-            txtInquilinoId.Name = "txtInquilinoId";
-            txtInquilinoId.Size = new Size(200, 23);
-            txtInquilinoId.TabIndex = 1;
+            btnRemover.Depth = 0;
+            btnRemover.Location = new Point(521, 92);
+            btnRemover.MouseState = MaterialSkin.MouseState.HOVER;
+            btnRemover.Name = "btnRemover";
+            btnRemover.Primary = true;
+            btnRemover.Size = new Size(100, 36);
+            btnRemover.TabIndex = 1;
+            btnRemover.Text = "Remover";
+            btnRemover.UseVisualStyleBackColor = true;
+            btnRemover.Click += btnRemover_Click;
             // 
-            // dtpDataInicio
+            // dataGridView
             // 
-            dtpDataInicio.Location = new Point(100, 64);
-            dtpDataInicio.Name = "dtpDataInicio";
-            dtpDataInicio.Size = new Size(220, 23);
-            dtpDataInicio.TabIndex = 2;
-            // 
-            // dtpDataFim
-            // 
-            dtpDataFim.Location = new Point(100, 90);
-            dtpDataFim.Name = "dtpDataFim";
-            dtpDataFim.Size = new Size(220, 23);
-            dtpDataFim.TabIndex = 3;
-            // 
-            // btnSalvar
-            // 
-            btnSalvar.Location = new Point(12, 116);
-            btnSalvar.Name = "btnSalvar";
-            btnSalvar.Size = new Size(75, 23);
-            btnSalvar.TabIndex = 4;
-            btnSalvar.Text = "Salvar";
-            btnSalvar.UseVisualStyleBackColor = true;
-            btnSalvar.Click += btnSalvar_Click;
-            // 
-            // lblImovelId
-            // 
-            lblImovelId.AutoSize = true;
-            lblImovelId.Location = new Point(12, 12);
-            lblImovelId.Name = "lblImovelId";
-            lblImovelId.Size = new Size(57, 15);
-            lblImovelId.TabIndex = 5;
-            lblImovelId.Text = "ID Imóvel";
-            lblImovelId.Click += lblImovelId_Click;
-            // 
-            // lblInquilinoId
-            // 
-            lblInquilinoId.AutoSize = true;
-            lblInquilinoId.Location = new Point(12, 38);
-            lblInquilinoId.Name = "lblInquilinoId";
-            lblInquilinoId.Size = new Size(68, 15);
-            lblInquilinoId.TabIndex = 6;
-            lblInquilinoId.Text = "ID Inquilino";
-            // 
-            // lblDataInicio
-            // 
-            lblDataInicio.AutoSize = true;
-            lblDataInicio.Location = new Point(12, 64);
-            lblDataInicio.Name = "lblDataInicio";
-            lblDataInicio.Size = new Size(63, 15);
-            lblDataInicio.TabIndex = 7;
-            lblDataInicio.Text = "Data Início";
-            // 
-            // lblDataFim
-            // 
-            lblDataFim.AutoSize = true;
-            lblDataFim.Location = new Point(12, 90);
-            lblDataFim.Name = "lblDataFim";
-            lblDataFim.Size = new Size(54, 15);
-            lblDataFim.TabIndex = 8;
-            lblDataFim.Text = "Data Fim";
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Location = new Point(34, 152);
+            dataGridView.Name = "dataGridView";
+            dataGridView.Size = new Size(600, 300);
+            dataGridView.TabIndex = 2;
             // 
             // ContratoForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(530, 323);
-            Controls.Add(lblDataFim);
-            Controls.Add(lblDataInicio);
-            Controls.Add(lblInquilinoId);
-            Controls.Add(lblImovelId);
-            Controls.Add(btnSalvar);
-            Controls.Add(dtpDataFim);
-            Controls.Add(dtpDataInicio);
-            Controls.Add(txtInquilinoId);
-            Controls.Add(txtImovelId);
+            ClientSize = new Size(891, 544);
+            Controls.Add(dataGridView);
+            Controls.Add(btnRemover);
+            Controls.Add(btnAdicionar);
             Name = "ContratoForm";
-            Text = "Adicionar Contrato";
+            Text = "Contrato";
+            Load += ContratoForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
+
+        #endregion
     }
 }
