@@ -8,6 +8,7 @@ namespace GestaoRendasImoveis.Models
 {
     public class Recibo
     {
+        public int IdRecibo { get; set; }  // Adicionando o Id do Recibo
         public string Descricao { get; set; }
         public int ImovelId { get; set; }
         public int InquilinoId { get; set; }

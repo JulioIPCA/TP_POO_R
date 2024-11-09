@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
 using GestaoRendasImoveis.Models;
 
 namespace GestaoRendasImoveis.Controllers
@@ -34,8 +32,7 @@ namespace GestaoRendasImoveis.Controllers
         {
             var options = new JsonSerializerOptions
             {
-                WriteIndented = true,
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
+                WriteIndented = true
             };
             string jsonString = JsonSerializer.Serialize(recibos, options);
             File.WriteAllText(filePath, jsonString);
@@ -48,6 +45,11 @@ namespace GestaoRendasImoveis.Controllers
                 string jsonString = File.ReadAllText(filePath);
                 recibos = JsonSerializer.Deserialize<List<Recibo>>(jsonString);
             }
+        }
+
+        public List<Recibo> ObterTodosRecibos()
+        {
+            return recibos;
         }
     }
 }
