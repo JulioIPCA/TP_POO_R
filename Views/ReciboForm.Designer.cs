@@ -1,27 +1,12 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace TP_POO_R.Views
+﻿namespace TP_POO_R.Views
 {
-    partial class ReciboForm : Form
+    partial class ReciboForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private MaterialSkin.Controls.MaterialRaisedButton btnAdicionar;
+        private MaterialSkin.Controls.MaterialRaisedButton btnRemover;
+        private System.Windows.Forms.DataGridView dataGridView;
 
-        private System.Windows.Forms.TextBox txtDescricao;
-        private System.Windows.Forms.TextBox txtValor;
-        private System.Windows.Forms.DateTimePicker dtpData;
-        private System.Windows.Forms.Button btnSalvar;
-        private System.Windows.Forms.Label lblDescricao;
-        private System.Windows.Forms.Label lblValor;
-        private System.Windows.Forms.Label lblData;
-
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -33,90 +18,58 @@ namespace TP_POO_R.Views
 
         private void InitializeComponent()
         {
-            txtDescricao = new TextBox();
-            txtValor = new TextBox();
-            dtpData = new DateTimePicker();
-            btnSalvar = new Button();
-            lblDescricao = new Label();
-            lblValor = new Label();
-            lblData = new Label();
+            btnAdicionar = new MaterialSkin.Controls.MaterialRaisedButton();
+            btnRemover = new MaterialSkin.Controls.MaterialRaisedButton();
+            dataGridView = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
-            // txtDescricao
+            // btnAdicionar
             // 
-            txtDescricao.Location = new Point(100, 12);
-            txtDescricao.Name = "txtDescricao";
-            txtDescricao.Size = new Size(200, 23);
-            txtDescricao.TabIndex = 0;
+            btnAdicionar.Depth = 0;
+            btnAdicionar.Location = new Point(377, 79);
+            btnAdicionar.MouseState = MaterialSkin.MouseState.HOVER;
+            btnAdicionar.Name = "btnAdicionar";
+            btnAdicionar.Primary = true;
+            btnAdicionar.Size = new Size(100, 36);
+            btnAdicionar.TabIndex = 0;
+            btnAdicionar.Text = "Adicionar";
+            btnAdicionar.UseVisualStyleBackColor = true;
+            btnAdicionar.Click += btnAdicionar_Click;
             // 
-            // txtValor
+            // btnRemover
             // 
-            txtValor.Location = new Point(100, 38);
-            txtValor.Name = "txtValor";
-            txtValor.Size = new Size(100, 23);
-            txtValor.TabIndex = 1;
+            btnRemover.Depth = 0;
+            btnRemover.Location = new Point(522, 79);
+            btnRemover.MouseState = MaterialSkin.MouseState.HOVER;
+            btnRemover.Name = "btnRemover";
+            btnRemover.Primary = true;
+            btnRemover.Size = new Size(100, 36);
+            btnRemover.TabIndex = 1;
+            btnRemover.Text = "Remover";
+            btnRemover.UseVisualStyleBackColor = true;
+            btnRemover.Click += btnRemover_Click;
             // 
-            // dtpData
+            // dataGridView
             // 
-            dtpData.Location = new Point(100, 64);
-            dtpData.Name = "dtpData";
-            dtpData.Size = new Size(200, 23);
-            dtpData.TabIndex = 2;
-            // 
-            // btnSalvar
-            // 
-            btnSalvar.Location = new Point(12, 90);
-            btnSalvar.Name = "btnSalvar";
-            btnSalvar.Size = new Size(75, 23);
-            btnSalvar.TabIndex = 3;
-            btnSalvar.Text = "Salvar";
-            btnSalvar.UseVisualStyleBackColor = true;
-            btnSalvar.Click += btnSalvar_Click;
-            // 
-            // lblDescricao
-            // 
-            lblDescricao.AutoSize = true;
-            lblDescricao.Location = new Point(12, 12);
-            lblDescricao.Name = "lblDescricao";
-            lblDescricao.Size = new Size(58, 15);
-            lblDescricao.TabIndex = 5;
-            lblDescricao.Text = "Descrição";
-            // 
-            // lblValor
-            // 
-            lblValor.AutoSize = true;
-            lblValor.Location = new Point(12, 38);
-            lblValor.Name = "lblValor";
-            lblValor.Size = new Size(33, 15);
-            lblValor.TabIndex = 6;
-            lblValor.Text = "Valor";
-            // 
-            // lblData
-            // 
-            lblData.AutoSize = true;
-            lblData.Location = new Point(12, 64);
-            lblData.Name = "lblData";
-            lblData.Size = new Size(31, 15);
-            lblData.TabIndex = 7;
-            lblData.Text = "Data";
+            dataGridView.Location = new Point(41, 139);
+            dataGridView.Name = "dataGridView";
+            dataGridView.Size = new Size(612, 300);
+            dataGridView.TabIndex = 2;
             // 
             // ReciboForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(679, 348);
-            Controls.Add(lblData);
-            Controls.Add(lblValor);
-            Controls.Add(lblDescricao);
-            Controls.Add(btnSalvar);
-            Controls.Add(dtpData);
-            Controls.Add(txtValor);
-            Controls.Add(txtDescricao);
+            ClientSize = new Size(701, 488);
+            Controls.Add(btnRemover);
+            Controls.Add(btnAdicionar);
+            Controls.Add(dataGridView);
             Name = "ReciboForm";
-            Text = "Adicionar Recibo";
+            Text = "Gestão de Recibos";
+            Load += ReciboForm_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
     }
 }
-
