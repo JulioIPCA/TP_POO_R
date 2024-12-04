@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace TP_POO_R.ViewsAdicionar
 {
     public class Contrato

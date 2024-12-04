@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows.Forms;
+﻿
 using MaterialSkin.Controls;
 using TP_POO_R.Controllers;
-using TP_POO_R.Models;
 using TP_POO_R.ViewsAdicionar;
 
 namespace TP_POO_R.Views

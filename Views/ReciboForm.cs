@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
+﻿
 using MaterialSkin.Controls;
 using TP_POO_R.Controllers;
 using TP_POO_R.Models;

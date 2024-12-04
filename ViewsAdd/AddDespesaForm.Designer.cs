@@ -1,9 +1,5 @@
 ﻿using MaterialSkin.Controls;
 using MaterialSkin;
-using System.Drawing;
-using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
-using System.Xml.Linq;
 
 namespace TP_POO_R.ViewsAdicionar
 {

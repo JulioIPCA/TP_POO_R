@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using TP_POO_R.Models;
 
 namespace TP_POO_R.Controllers

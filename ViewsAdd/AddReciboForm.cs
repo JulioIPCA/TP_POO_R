@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿
 using TP_POO_R.Controllers;
 using TP_POO_R.Models;
 
@@ -27,7 +26,7 @@ namespace TP_POO_R.ViewsAdicionar
                 int imovelId = int.Parse(txtImovelId.Text);
                 int inquilinoId = int.Parse(txtInquilinoId.Text);
                 decimal valor = decimal.Parse(txtValor.Text);
-                DateTime data = DateTime.Parse(txtData.Text);
+                DateTime data = dtpData.Value; // Usar o valor do DateTimePicker
 
                 // Criar e validar o recibo usando o controller
                 NovoRecibo = _reciboController.CriarRecibo(idRecibo, descricao, imovelId, inquilinoId, valor, data);

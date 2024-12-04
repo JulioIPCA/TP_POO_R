@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 namespace GestaoRendasImoveis.Models
 {
     public class Imovel

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using GestaoRendasImoveis.Controllers;
-using GestaoRendasImoveis.Models;
+﻿using GestaoRendasImoveis.Models;
 using MaterialSkin.Controls;
 using TP_POO_R.Controllers;
 using TP_POO_R.ViewsAdicionar;

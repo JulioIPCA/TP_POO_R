@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿
 using GestaoRendasImoveis.Models;
 
 namespace TP_POO_R.ViewsAdicionar
