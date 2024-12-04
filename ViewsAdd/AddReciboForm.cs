@@ -1,25 +1,27 @@
 ﻿using System;
 using System.Windows.Forms;
-using GestaoRendasImoveis.Models;
+using TP_POO_R.Controllers;
+using TP_POO_R.Models;
 
 namespace TP_POO_R.ViewsAdicionar
 {
     public partial class AddReciboForm : Form
     {
         public Recibo? NovoRecibo { get; private set; }
+        private readonly ReciboController _reciboController;
 
         public AddReciboForm()
         {
             InitializeComponent();
             NovoRecibo = null;
+            _reciboController = new ReciboController();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
             {
-                // Aqui você pode adicionar a lógica para salvar os dados inseridos
-                // Exemplo:
+                // Coletar dados do formulário
                 int idRecibo = int.Parse(txtIdRecibo.Text);
                 string descricao = txtDescricao.Text;
                 int imovelId = int.Parse(txtImovelId.Text);
@@ -27,24 +29,8 @@ namespace TP_POO_R.ViewsAdicionar
                 decimal valor = decimal.Parse(txtValor.Text);
                 DateTime data = DateTime.Parse(txtData.Text);
 
-                // Validação básica
-                if (string.IsNullOrWhiteSpace(descricao) ||
-                    imovelId <= 0 || inquilinoId <= 0 || valor <= 0 || data == default)
-                {
-                    MessageBox.Show("Todos os campos devem ser preenchidos corretamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Criar um novo recibo
-                NovoRecibo = new Recibo
-                {
-                    IdRecibo = idRecibo,
-                    Descricao = descricao,
-                    ImovelId = imovelId,
-                    InquilinoId = inquilinoId,
-                    Valor = valor,
-                    Data = data
-                };
+                // Criar e validar o recibo usando o controller
+                NovoRecibo = _reciboController.CriarRecibo(idRecibo, descricao, imovelId, inquilinoId, valor, data);
 
                 MessageBox.Show("Recibo salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;

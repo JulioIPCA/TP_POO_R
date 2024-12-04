@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Windows.Forms;
-using GestaoRendasImoveis.Models;
 using MaterialSkin.Controls;
-//using TP_POO_R.Models; // Certifique-se de que este namespace está correto
+using TP_POO_R.Controllers;
+using TP_POO_R.Models;
 using TP_POO_R.ViewsAdicionar;
 
 namespace TP_POO_R.Views
 {
     public partial class ReciboForm : MaterialForm
     {
-        private List<Recibo> _recibos; // Variável de instância para armazenar recibos
+        private readonly ReciboController _reciboController;
 
         public ReciboForm()
         {
             InitializeComponent();
-            _recibos = new List<Recibo>(); // Inicializar a lista de recibos
+            _reciboController = new ReciboController();
         }
 
         private void ReciboForm_Load(object sender, EventArgs e)
@@ -44,30 +42,14 @@ namespace TP_POO_R.Views
 
         private void LoadData()
         {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "recibos.json");
-            if (File.Exists(filePath))
+            try
             {
-                try
-                {
-                    var json = File.ReadAllText(filePath);
-                    if (!string.IsNullOrWhiteSpace(json))
-                    {
-                        _recibos = JsonSerializer.Deserialize<List<Recibo>>(json) ?? new List<Recibo>(); // Carregar dados na variável de instância
-                        dataGridView.DataSource = _recibos;
-                    }
-                    else
-                    {
-                        dataGridView.DataSource = new List<Recibo>();
-                    }
-                }
-                catch (JsonException ex)
-                {
-                    MessageBox.Show($"Erro ao carregar dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    dataGridView.DataSource = new List<Recibo>();
-                }
+                var recibos = _reciboController.GetRecibos();
+                dataGridView.DataSource = recibos;
             }
-            else
+            catch (Exception ex)
             {
+                MessageBox.Show($"Erro ao carregar dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dataGridView.DataSource = new List<Recibo>();
             }
         }
@@ -77,17 +59,20 @@ namespace TP_POO_R.Views
             AddReciboForm addReciboForm = new AddReciboForm();
             if (addReciboForm.ShowDialog() == DialogResult.OK)
             {
-                // Adicionar o novo recibo à lista
+                // Adicionar o novo recibo
                 var novoRecibo = addReciboForm.NovoRecibo;
-                _recibos.Add(novoRecibo);
 
-                // Salvar a lista atualizada de recibos
-                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "recibos.json");
-                var json = JsonSerializer.Serialize(_recibos, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
+                if (novoRecibo != null)
+                {
+                    _reciboController.AdicionarRecibo(novoRecibo);
 
-                // Recarregar dados após adicionar um novo recibo
-                LoadData();
+                    // Recarregar dados após adicionar um novo recibo
+                    LoadData();
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao obter o novo recibo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -98,17 +83,21 @@ namespace TP_POO_R.Views
                 // Obter o índice da linha selecionada
                 var selectedIndex = dataGridView.SelectedRows[0].Index;
 
-                // Remover o recibo selecionado da lista original
-                var reciboToRemove = _recibos[selectedIndex];
-                _recibos.Remove(reciboToRemove);
+                // Obter o recibo selecionado
+                var reciboToRemove = dataGridView.SelectedRows[0].DataBoundItem as Recibo;
 
-                // Salvar a lista atualizada de recibos
-                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "recibos.json");
-                var json = JsonSerializer.Serialize(_recibos, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
+                if (reciboToRemove != null)
+                {
+                    // Remover o recibo selecionado
+                    _reciboController.RemoverRecibo(reciboToRemove.IdRecibo);
 
-                // Recarregar dados após remover o recibo
-                LoadData();
+                    // Recarregar dados após remover o recibo
+                    LoadData();
+                }
+                else
+                {
+                    MessageBox.Show("Erro ao obter o recibo selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
@@ -117,4 +106,3 @@ namespace TP_POO_R.Views
         }
     }
 }
-

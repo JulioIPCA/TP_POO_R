@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestaoRendasImoveis.Models
+﻿namespace TP_POO_R.Models
 {
     public class Inquilino
     {
         public int Id { get; set; }
-        public string Nome { get; set; }
-
-        public string NIF { get; set; }
-        public string Telefone { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public string NIF { get; set; } = string.Empty;
+        public string Telefone { get; set; } = string.Empty;
     }
 }
+

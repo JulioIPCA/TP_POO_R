@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.Json;
 using System.Windows.Forms;
+using GestaoRendasImoveis.Controllers;
 using GestaoRendasImoveis.Models;
 using MaterialSkin.Controls;
+using TP_POO_R.Controllers;
 using TP_POO_R.ViewsAdicionar;
 
 namespace TP_POO_R.Views
@@ -13,10 +12,12 @@ namespace TP_POO_R.Views
     public partial class ImovelForm : MaterialForm
     {
         private List<Imovel> _imoveis; // Variável de instância para armazenar imóveis
+        private readonly ImovelController _imovelController;
 
         public ImovelForm()
         {
             InitializeComponent();
+            _imovelController = new ImovelController();
             _imoveis = new List<Imovel>(); // Inicializar a lista de imóveis
         }
 
@@ -44,30 +45,14 @@ namespace TP_POO_R.Views
 
         private void LoadData()
         {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imoveis.json");
-            if (File.Exists(filePath))
+            try
             {
-                try
-                {
-                    var json = File.ReadAllText(filePath);
-                    if (!string.IsNullOrWhiteSpace(json))
-                    {
-                        _imoveis = JsonSerializer.Deserialize<List<Imovel>>(json) ?? new List<Imovel>(); // Carregar dados na variável de instância
-                        dataGridView.DataSource = _imoveis;
-                    }
-                    else
-                    {
-                        dataGridView.DataSource = new List<Imovel>();
-                    }
-                }
-                catch (JsonException ex)
-                {
-                    MessageBox.Show($"Erro ao carregar dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    dataGridView.DataSource = new List<Imovel>();
-                }
+                _imoveis = _imovelController.CarregarImoveis();
+                dataGridView.DataSource = _imoveis;
             }
-            else
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 dataGridView.DataSource = new List<Imovel>();
             }
         }
@@ -82,9 +67,7 @@ namespace TP_POO_R.Views
                 _imoveis.Add(novoImovel);
 
                 // Salvar a lista atualizada de imóveis
-                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imoveis.json");
-                var json = JsonSerializer.Serialize(_imoveis, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
+                _imovelController.SalvarImoveis(_imoveis);
 
                 // Recarregar dados após adicionar um novo imóvel
                 LoadData();
@@ -103,9 +86,7 @@ namespace TP_POO_R.Views
                 _imoveis.Remove(imovelToRemove);
 
                 // Salvar a lista atualizada de imóveis
-                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imoveis.json");
-                var json = JsonSerializer.Serialize(_imoveis, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
+                _imovelController.SalvarImoveis(_imoveis);
 
                 // Recarregar dados após remover o imóvel
                 LoadData();

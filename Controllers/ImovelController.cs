@@ -1,53 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
 using GestaoRendasImoveis.Models;
 
-namespace GestaoRendasImoveis.Controllers
+namespace TP_POO_R.Controllers
 {
     public class ImovelController
     {
-        private List<Imovel> imoveis = new List<Imovel>();
-        private readonly string filePath = "imoveis.json";
+        private readonly string _filePath;
 
         public ImovelController()
         {
-            CarregarImoveis();
+            _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imoveis.json");
         }
 
-        public bool AdicionarImovel(Imovel imovel)
+        public List<Imovel> CarregarImoveis()
         {
-            imoveis.Add(imovel);
-            SalvarImoveis();
-            return imoveis.Contains(imovel);
-        }
-
-        public List<Imovel> ObterImoveis()
-        {
-            return imoveis;
-        }
-
-        public void SalvarImoveis()
-        {
-            var options = new JsonSerializerOptions
+            if (File.Exists(_filePath))
             {
-                WriteIndented = true,
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
-            };
-            string jsonString = JsonSerializer.Serialize(imoveis, options);
-            File.WriteAllText(filePath, jsonString);
-        }
-
-        public void CarregarImoveis()
-        {
-            if (File.Exists(filePath))
-            {
-                string jsonString = File.ReadAllText(filePath);
-                imoveis = JsonSerializer.Deserialize<List<Imovel>>(jsonString);
+                try
+                {
+                    var json = File.ReadAllText(_filePath);
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        return JsonSerializer.Deserialize<List<Imovel>>(json) ?? new List<Imovel>();
+                    }
+                }
+                catch (JsonException ex)
+                {
+                    throw new Exception($"Erro ao carregar dados: {ex.Message}");
+                }
             }
+            return new List<Imovel>();
+        }
+
+        public void SalvarImoveis(List<Imovel> imoveis)
+        {
+            var json = JsonSerializer.Serialize(imoveis, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(_filePath, json);
         }
     }
 }

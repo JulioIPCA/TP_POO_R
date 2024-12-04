@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestaoRendasImoveis.Models
+﻿namespace TP_POO_R.Models
 {
     public class Recibo
     {
-        public int IdRecibo { get; set; }  // Adicionando o Id do Recibo
-        public string Descricao { get; set; }
+        public int IdRecibo { get; set; }
+        public string Descricao { get; set; } = string.Empty; // Inicialização com valor padrão
         public int ImovelId { get; set; }
         public int InquilinoId { get; set; }
         public decimal Valor { get; set; }

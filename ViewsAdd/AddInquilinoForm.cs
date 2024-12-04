@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
+using TP_POO_R.Controllers; // Certifique-se de que este namespace está correto
+using TP_POO_R.Models;
 
 namespace TP_POO_R.ViewsAdicionar
 {
     public partial class AddInquilinoForm : MaterialForm
     {
+        private readonly InquilinoController _inquilinoController;
+
         public AddInquilinoForm()
         {
             InitializeComponent();
+            _inquilinoController = new InquilinoController();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -27,29 +29,8 @@ namespace TP_POO_R.ViewsAdicionar
                     Telefone = txtTelefone.Text
                 };
 
-                // Caminho do arquivo JSON
-                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "inquilinos.json");
-
-                // Ler a lista existente de inquilinos
-                List<Inquilino> inquilinos;
-                if (File.Exists(filePath))
-                {
-                    var existingJson = File.ReadAllText(filePath);
-                    inquilinos = JsonSerializer.Deserialize<List<Inquilino>>(existingJson) ?? new List<Inquilino>();
-                }
-                else
-                {
-                    inquilinos = new List<Inquilino>();
-                }
-
-                // Adicionar o novo inquilino à lista
-                inquilinos.Add(inquilino);
-
-                // Serializar a lista atualizada de inquilinos para JSON
-                var json = JsonSerializer.Serialize(inquilinos, new JsonSerializerOptions { WriteIndented = true });
-
-                // Salvar o JSON no arquivo
-                File.WriteAllText(filePath, json);
+                // Adicionar o novo inquilino
+                _inquilinoController.AdicionarInquilino(inquilino);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -65,13 +46,5 @@ namespace TP_POO_R.ViewsAdicionar
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
-    }
-
-    public class Inquilino
-    {
-        public int Id { get; set; }
-        public string Nome { get; set; } = string.Empty;
-        public string NIF { get; set; } = string.Empty;
-        public string Telefone { get; set; } = string.Empty;
     }
 }

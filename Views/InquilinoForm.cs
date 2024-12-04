@@ -1,18 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
+using TP_POO_R.Controllers;
+using TP_POO_R.Models;
 using TP_POO_R.ViewsAdicionar;
 
 namespace TP_POO_R.Views
 {
     public partial class InquilinoForm : MaterialForm
     {
+        private readonly InquilinoController _inquilinoController;
+
         public InquilinoForm()
         {
             InitializeComponent();
+            _inquilinoController = new InquilinoController();
         }
 
         private void InquilinoForm_Load(object sender, EventArgs e)
@@ -22,32 +24,7 @@ namespace TP_POO_R.Views
 
         private void LoadData()
         {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "inquilinos.json");
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    var json = File.ReadAllText(filePath);
-                    if (!string.IsNullOrWhiteSpace(json))
-                    {
-                        var inquilinos = JsonSerializer.Deserialize<List<Inquilino>>(json);
-                        dataGridView.DataSource = inquilinos ?? new List<Inquilino>();
-                    }
-                    else
-                    {
-                        dataGridView.DataSource = new List<Inquilino>();
-                    }
-                }
-                catch (JsonException ex)
-                {
-                    MessageBox.Show($"Erro ao carregar dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    dataGridView.DataSource = new List<Inquilino>();
-                }
-            }
-            else
-            {
-                dataGridView.DataSource = new List<Inquilino>();
-            }
+            dataGridView.DataSource = _inquilinoController.GetInquilinos();
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
@@ -64,20 +41,10 @@ namespace TP_POO_R.Views
             if (dataGridView.SelectedRows.Count > 0)
             {
                 var selectedRow = dataGridView.SelectedRows[0];
-                var inquilino = (Inquilino)selectedRow.DataBoundItem;
+                var inquilino = (TP_POO_R.Models.Inquilino)selectedRow.DataBoundItem;
 
-                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "inquilinos.json");
-                var json = File.ReadAllText(filePath);
-                var inquilinos = JsonSerializer.Deserialize<List<Inquilino>>(json);
-
-                if (inquilinos != null)
-                {
-                    inquilinos.RemoveAll(i => i.Id == inquilino.Id);
-                    json = JsonSerializer.Serialize(inquilinos, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText(filePath, json);
-
-                    LoadData();
-                }
+                _inquilinoController.RemoverInquilino(inquilino.Id);
+                LoadData();
             }
             else
             {
@@ -85,12 +52,5 @@ namespace TP_POO_R.Views
             }
         }
     }
-
-    public class Inquilino
-    {
-        public int Id { get; set; }
-        public string Nome { get; set; }
-        public string NIF { get; set; }
-        public string Telefone { get; set; }
-    }
 }
+

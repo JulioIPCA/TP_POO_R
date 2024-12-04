@@ -1,53 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
-using GestaoRendasImoveis.Models;
+using TP_POO_R.Models;
 
-namespace GestaoRendasImoveis.Controllers
+namespace TP_POO_R.Controllers
 {
     public class InquilinoController
     {
-        private List<Inquilino> inquilinos = new List<Inquilino>();
-        private readonly string filePath = "inquilinos.json";
+        private readonly string _filePath;
 
         public InquilinoController()
         {
-            CarregarInquilinos();
+            _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "inquilinos.json");
         }
 
-        public bool AdicionarInquilino(Inquilino inquilino)
+        public List<Inquilino> GetInquilinos()
         {
-            inquilinos.Add(inquilino);
-            SalvarInquilinos();
-            return inquilinos.Contains(inquilino);
-        }
-
-        public List<Inquilino> ObterInquilinos()
-        {
-            return inquilinos;
-        }
-
-        public void SalvarInquilinos()
-        {
-            var options = new JsonSerializerOptions
+            if (File.Exists(_filePath))
             {
-                WriteIndented = true,
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
-            };
-            string jsonString = JsonSerializer.Serialize(inquilinos, options);
-            File.WriteAllText(filePath, jsonString);
-        }
-
-        public void CarregarInquilinos()
-        {
-            if (File.Exists(filePath))
-            {
-                string jsonString = File.ReadAllText(filePath);
-                inquilinos = JsonSerializer.Deserialize<List<Inquilino>>(jsonString);
+                try
+                {
+                    var json = File.ReadAllText(_filePath);
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        return JsonSerializer.Deserialize<List<Inquilino>>(json) ?? new List<Inquilino>();
+                    }
+                }
+                catch (JsonException ex)
+                {
+                    // Log error
+                }
             }
+            return new List<Inquilino>();
+        }
+
+        public void AdicionarInquilino(Inquilino inquilino)
+        {
+            var inquilinos = GetInquilinos();
+            inquilinos.Add(inquilino);
+            SalvarInquilinos(inquilinos);
+        }
+
+        public void RemoverInquilino(int id)
+        {
+            var inquilinos = GetInquilinos();
+            inquilinos.RemoveAll(i => i.Id == id);
+            SalvarInquilinos(inquilinos);
+        }
+
+        private void SalvarInquilinos(List<Inquilino> inquilinos)
+        {
+            var json = JsonSerializer.Serialize(inquilinos, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(_filePath, json);
         }
     }
 }
