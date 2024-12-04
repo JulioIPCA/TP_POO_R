@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GestaoRendasImoveis.Models
+namespace TP_POO_R.ViewsAdicionar
 {
     public class Contrato
     {
-        public int Id { get; set; }
-        public int ImovelId { get; set; }
-        public int InquilinoId { get; set; }
-        public DateTime DataInicio { get; set; }
-        public DateTime DataFim { get; set; }
+        public string IdImovel { get; set; } = string.Empty;
+        public DateTime Data { get; set; }
+        public string Nome { get; set; } = string.Empty;
+        public string Valor { get; set; } = string.Empty;
+        public DateTime DataCessacao { get; set; }
     }
 }

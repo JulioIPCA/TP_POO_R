@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GestaoRendasImoveis.Models
+﻿namespace TP_POO_R.Models
 {
     public class Despesa
     {
-        public int Id { get; set; }
-        public int ImovelId { get; set; }
-        public string Descricao { get; set; }
-        public decimal Valor { get; set; }
+        public int IdInquilino { get; set; }
+        public int IdImovel { get; set; }
         public DateTime Data { get; set; }
+        public string Descricao { get; set; } = string.Empty; // Inicializar como string vazia
+        public decimal ValorLuz { get; set; }
+        public decimal ValorGas { get; set; }
+        public decimal ValorAgua { get; set; }
+        public decimal ValorTotal
+        {
+            get
+            {
+                return ValorLuz + ValorGas + ValorAgua;
+            }
+        }
     }
 }

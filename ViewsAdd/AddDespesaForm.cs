@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
-using TP_POO_R.Views; // Adicione esta linha
+using MaterialSkin.Controls;
+using TP_POO_R.Models;
 
 namespace TP_POO_R.ViewsAdicionar
 {
-    public partial class AddDespesa : Form
+    public partial class AddDespesa : MaterialForm
     {
-        public Despesa NovaDespesa { get; private set; }
+        public Despesa? NovaDespesa { get; private set; } // Tornar anulável
 
         public AddDespesa()
         {
@@ -15,26 +16,33 @@ namespace TP_POO_R.ViewsAdicionar
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            NovaDespesa = new Despesa
+            try
             {
-                
-                IdInquilino = txtIdInquilino.Text,
-                IdImovel = txtIdImovel.Text,
-                Data = dtpData.Value,
-                Descricao = txtDescricao.Text,
-                ValorLuz = decimal.Parse(txtValorLuz.Text),
-                ValorGas = decimal.Parse(txtValorGas.Text),
-                ValorAgua = decimal.Parse(txtValorAgua.Text)
-            };
+                // Criar uma nova instância de Despesa com os dados do formulário
+                NovaDespesa = new Despesa
+                {
+                    IdInquilino = int.Parse(txtIdInquilino.Text),
+                    IdImovel = int.Parse(txtIdImovel.Text),
+                    Data = dtpData.Value,
+                    Descricao = txtDescricao.Text,
+                    ValorLuz = decimal.Parse(txtValorLuz.Text),
+                    ValorGas = decimal.Parse(txtValorGas.Text),
+                    ValorAgua = decimal.Parse(txtValorAgua.Text)
+                };
 
-            DialogResult = DialogResult.OK;
-            Close();
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Por favor, insira valores válidos nos campos numéricos.", "Erro de Formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

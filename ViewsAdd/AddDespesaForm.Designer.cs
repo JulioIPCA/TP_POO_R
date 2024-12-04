@@ -1,17 +1,24 @@
-﻿namespace TP_POO_R.ViewsAdicionar
+﻿using MaterialSkin.Controls;
+using MaterialSkin;
+using System.Drawing;
+using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
+
+namespace TP_POO_R.ViewsAdicionar
 {
-    partial class AddDespesa
+    partial class AddDespesa : MaterialForm
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.TextBox txtIdInquilino;
-        private System.Windows.Forms.TextBox txtIdImovel;
-        private System.Windows.Forms.DateTimePicker dtpData;
-        private System.Windows.Forms.TextBox txtDescricao;
-        private System.Windows.Forms.TextBox txtValorLuz;
-        private System.Windows.Forms.TextBox txtValorGas;
-        private System.Windows.Forms.TextBox txtValorAgua;
-        private System.Windows.Forms.Button btnSalvar;
-        private System.Windows.Forms.Button btnCancelar;
+        private MaterialSingleLineTextField txtIdInquilino;
+        private MaterialSingleLineTextField txtIdImovel;
+        private DateTimePicker dtpData;
+        private MaterialSingleLineTextField txtDescricao;
+        private MaterialSingleLineTextField txtValorLuz;
+        private MaterialSingleLineTextField txtValorGas;
+        private MaterialSingleLineTextField txtValorAgua;
+        private MaterialRaisedButton btnSalvar;
+        private MaterialRaisedButton btnCancelar;
 
         protected override void Dispose(bool disposing)
         {
@@ -24,76 +31,88 @@
 
         private void InitializeComponent()
         {
-            txtIdInquilino = new TextBox();
-            txtIdImovel = new TextBox();
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(
+                Primary.Blue600, Primary.Blue700,
+                Primary.Blue200, Accent.LightBlue200,
+                TextShade.WHITE
+            );
+
+            txtIdInquilino = new MaterialSingleLineTextField();
+            txtIdImovel = new MaterialSingleLineTextField();
             dtpData = new DateTimePicker();
-            txtDescricao = new TextBox();
-            txtValorLuz = new TextBox();
-            txtValorGas = new TextBox();
-            txtValorAgua = new TextBox();
-            btnSalvar = new Button();
-            btnCancelar = new Button();
+            txtDescricao = new MaterialSingleLineTextField();
+            txtValorLuz = new MaterialSingleLineTextField();
+            txtValorGas = new MaterialSingleLineTextField();
+            txtValorAgua = new MaterialSingleLineTextField();
+            btnSalvar = new MaterialRaisedButton();
+            btnCancelar = new MaterialRaisedButton();
             SuspendLayout();
             // 
             // txtIdInquilino
             // 
-            txtIdInquilino.Location = new Point(12, 12);
+            txtIdInquilino.Hint = "ID Inquilino";
+            txtIdInquilino.Location = new Point(12, 70);
             txtIdInquilino.Name = "txtIdInquilino";
-            txtIdInquilino.PlaceholderText = "ID Inquilino";
             txtIdInquilino.Size = new Size(200, 23);
             txtIdInquilino.TabIndex = 0;
             // 
             // txtIdImovel
             // 
-            txtIdImovel.Location = new Point(12, 38);
+            txtIdImovel.Hint = "ID Imóvel";
+            txtIdImovel.Location = new Point(12, 100);
             txtIdImovel.Name = "txtIdImovel";
-            txtIdImovel.PlaceholderText = "ID Imóvel";
             txtIdImovel.Size = new Size(200, 23);
             txtIdImovel.TabIndex = 1;
             // 
             // dtpData
             // 
-            dtpData.Location = new Point(12, 64);
+            dtpData.Location = new Point(12, 130);
             dtpData.Name = "dtpData";
             dtpData.Size = new Size(200, 23);
             dtpData.TabIndex = 2;
             // 
             // txtDescricao
             // 
-            txtDescricao.Location = new Point(12, 90);
+            txtDescricao.Hint = "Descrição";
+            txtDescricao.Location = new Point(12, 160);
             txtDescricao.Name = "txtDescricao";
-            txtDescricao.PlaceholderText = "Descrição";
             txtDescricao.Size = new Size(200, 23);
             txtDescricao.TabIndex = 3;
             // 
             // txtValorLuz
             // 
-            txtValorLuz.Location = new Point(12, 116);
+            txtValorLuz.Hint = "Valor Luz";
+            txtValorLuz.Location = new Point(12, 190);
             txtValorLuz.Name = "txtValorLuz";
-            txtValorLuz.PlaceholderText = "Valor Luz";
             txtValorLuz.Size = new Size(200, 23);
             txtValorLuz.TabIndex = 4;
             // 
             // txtValorGas
             // 
-            txtValorGas.Location = new Point(12, 142);
+            txtValorGas.Hint = "Valor Gás";
+            txtValorGas.Location = new Point(12, 220);
             txtValorGas.Name = "txtValorGas";
-            txtValorGas.PlaceholderText = "Valor Gás";
             txtValorGas.Size = new Size(200, 23);
             txtValorGas.TabIndex = 5;
             // 
             // txtValorAgua
             // 
-            txtValorAgua.Location = new Point(12, 168);
+            txtValorAgua.Hint = "Valor Água";
+            txtValorAgua.Location = new Point(12, 250);
             txtValorAgua.Name = "txtValorAgua";
-            txtValorAgua.PlaceholderText = "Valor Água";
             txtValorAgua.Size = new Size(200, 23);
             txtValorAgua.TabIndex = 6;
             // 
             // btnSalvar
             // 
-            btnSalvar.Location = new Point(12, 194);
+            btnSalvar.Depth = 0;
+            btnSalvar.Location = new Point(12, 280);
+            btnSalvar.MouseState = MaterialSkin.MouseState.HOVER;
             btnSalvar.Name = "btnSalvar";
+            btnSalvar.Primary = true;
             btnSalvar.Size = new Size(75, 23);
             btnSalvar.TabIndex = 7;
             btnSalvar.Text = "Salvar";
@@ -102,8 +121,11 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.Location = new Point(137, 194);
+            btnCancelar.Depth = 0;
+            btnCancelar.Location = new Point(137, 280);
+            btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
             btnCancelar.Name = "btnCancelar";
+            btnCancelar.Primary = true;
             btnCancelar.Size = new Size(75, 23);
             btnCancelar.TabIndex = 8;
             btnCancelar.Text = "Cancelar";
@@ -112,7 +134,9 @@
             // 
             // AddDespesa
             // 
-            ClientSize = new Size(238, 252);
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(238, 320);
             Controls.Add(btnCancelar);
             Controls.Add(btnSalvar);
             Controls.Add(txtValorAgua);

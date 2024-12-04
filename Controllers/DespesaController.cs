@@ -1,41 +1,77 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
-using GestaoRendasImoveis.Models;
+using TP_POO_R.Models;
 
-namespace GestaoRendasImoveis.Controllers
+namespace TP_POO_R.Controllers
 {
     public class DespesaController
     {
-        private List<Despesa> despesas = new List<Despesa>();
-        private readonly string filePath = "despesas.json";
+        private List<Despesa> _despesas;
+        private readonly string _filePath;
 
-        public void AdicionarDespesa(Despesa despesa)
+        public DespesaController()
         {
-            despesas.Add(despesa);
-            SalvarDespesas();
+            _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "despesas.json");
+            _despesas = LoadDespesasFromFile();
         }
 
-        public List<Despesa> ObterDespesas()
+        public List<dynamic> LoadDespesas()
         {
-            return despesas;
-        }
-
-        public void SalvarDespesas()
-        {
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(despesas, options);
-            File.WriteAllText(filePath, jsonString);
-        }
-
-        public void CarregarDespesas()
-        {
-            if (File.Exists(filePath))
+            return _despesas.Select(d => new
             {
-                string jsonString = File.ReadAllText(filePath);
-                despesas = JsonSerializer.Deserialize<List<Despesa>>(jsonString);
+                d.IdInquilino,
+                d.IdImovel,
+                d.Data,
+                d.Descricao,
+                d.ValorLuz,
+                d.ValorGas,
+                d.ValorAgua,
+                ValorTotal = d.ValorLuz + d.ValorGas + d.ValorAgua
+            }).Cast<dynamic>().ToList();
+        }
+
+        public void AddDespesa(Despesa novaDespesa)
+        {
+            _despesas.Add(novaDespesa);
+            SaveDespesasToFile();
+        }
+
+        public void RemoveDespesa(int index)
+        {
+            if (index >= 0 && index < _despesas.Count)
+            {
+                _despesas.RemoveAt(index);
+                SaveDespesasToFile();
             }
+        }
+
+        private List<Despesa> LoadDespesasFromFile()
+        {
+            if (File.Exists(_filePath))
+            {
+                try
+                {
+                    var json = File.ReadAllText(_filePath);
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        return JsonSerializer.Deserialize<List<Despesa>>(json) ?? new List<Despesa>();
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Handle exception
+                }
+            }
+            return new List<Despesa>();
+        }
+
+        private void SaveDespesasToFile()
+        {
+            var json = JsonSerializer.Serialize(_despesas, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(_filePath, json);
         }
     }
 }

@@ -1,59 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Unicode;
-using GestaoRendasImoveis.Models;
+using System.Windows.Forms;
 
-namespace GestaoRendasImoveis.Controllers
+namespace TP_POO_R.ViewsAdicionar
 {
     public class ContratoController
     {
-        private List<Contrato> contratos = new List<Contrato>();
-        private readonly string filePath = "contratos.json";
+        private readonly DataGridView? _dataGridView;
+        private readonly string _filePath;
 
-        public ContratoController()
+        public ContratoController(DataGridView? dataGridView = null)
         {
-            CarregarContratos();
+            _dataGridView = dataGridView;
+            _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "contratos.json");
         }
 
-        public bool AdicionarContrato(Contrato contrato)
+        public void LoadData()
         {
-            contratos.Add(contrato);
-            SalvarContratos();
-            return contratos.Contains(contrato);
-        }
+            if (_dataGridView == null) return;
 
-        public List<Contrato> ObterContratos()
-        {
-            return contratos;
-        }
-
-        public void SalvarContratos()
-        {
-            var options = new JsonSerializerOptions
+            if (File.Exists(_filePath))
             {
-                WriteIndented = true,
-                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All)
-            };
-            string jsonString = JsonSerializer.Serialize(contratos, options);
-            File.WriteAllText(filePath, jsonString);
-        }
-
-        public void CarregarContratos()
-        {
-            if (File.Exists(filePath))
+                try
+                {
+                    var json = File.ReadAllText(_filePath);
+                    var contratos = JsonSerializer.Deserialize<List<Contrato>>(json) ?? new List<Contrato>();
+                    _dataGridView.DataSource = contratos;
+                }
+                catch (JsonException ex)
+                {
+                    MessageBox.Show($"Erro ao carregar dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _dataGridView.DataSource = new List<Contrato>();
+                }
+            }
+            else
             {
-                string jsonString = File.ReadAllText(filePath);
-                contratos = JsonSerializer.Deserialize<List<Contrato>>(jsonString);
+                _dataGridView.DataSource = new List<Contrato>();
             }
         }
 
-        public List<Contrato> ObterTodosContratos()
+        public void RemoveSelectedContrato()
         {
-            // Retornar a lista de contratos carregada do arquivo JSON
-            return contratos;
+            if (_dataGridView == null || _dataGridView.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecione um contrato para remover.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var selectedRow = _dataGridView.SelectedRows[0];
+            var contrato = (Contrato)selectedRow.DataBoundItem;
+
+            var json = File.ReadAllText(_filePath);
+            var contratos = JsonSerializer.Deserialize<List<Contrato>>(json);
+            if (contratos != null)
+            {
+                contratos.RemoveAll(c => c.IdImovel == contrato.IdImovel);
+
+                json = JsonSerializer.Serialize(contratos, new JsonSerializerOptions { WriteIndented = true });
+                File.WriteAllText(_filePath, json);
+
+                LoadData();
+            }
+        }
+
+        public void AddContrato(Contrato contrato)
+        {
+            List<Contrato> contratos;
+            if (File.Exists(_filePath))
+            {
+                var existingJson = File.ReadAllText(_filePath);
+                contratos = JsonSerializer.Deserialize<List<Contrato>>(existingJson) ?? new List<Contrato>();
+            }
+            else
+            {
+                contratos = new List<Contrato>();
+            }
+
+            contratos.Add(contrato);
+
+            var json = JsonSerializer.Serialize(contratos, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(_filePath, json);
         }
     }
 }
