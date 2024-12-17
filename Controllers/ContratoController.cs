@@ -1,111 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Windows.Forms;
 using TP_POO_R.Models;
 using TP_POO_R.ViewsAdicionar;
 
-namespace TP_POO_R.Controllers
+public class ContratoController
 {
-    public class ContratoController
+    private readonly DataGridView _dataGridView;
+    private readonly string _filePath;
+
+    public ContratoController(DataGridView dataGridView)
     {
-        private readonly DataGridView? _dataGridView;
-        private readonly string _filePath;
+        _dataGridView = dataGridView;
+        _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "contratos.json");
+    }
 
-        public ContratoController(DataGridView? dataGridView = null)
+    public void LoadData()
+    {
+        var contratos = GetContratosFromDataSource();
+        _dataGridView.DataSource = contratos;
+    }
+
+    public void AddContrato(Contrato contrato)
+    {
+        var contratos = GetContratosFromDataSource();
+        contratos.Add(contrato);
+        SaveContratosToDataSource(contratos);
+        LoadData(); // Refresh the data after adding
+    }
+
+    public void RemoveSelectedContrato()
+    {
+        if (_dataGridView.SelectedRows.Count > 0)
         {
-            _dataGridView = dataGridView;
-            _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "contratos.json");
+            var contratos = GetContratosFromDataSource();
+            var selectedContrato = (Contrato)_dataGridView.SelectedRows[0].DataBoundItem;
+            var contratoToRemove = contratos.FirstOrDefault(c => c.IdImovel == selectedContrato.IdImovel && c.Data == selectedContrato.Data);
+            if (contratoToRemove != null)
+            {
+                contratos.Remove(contratoToRemove);
+                SaveContratosToDataSource(contratos);
+                LoadData(); // Refresh the data after removal
+            }
         }
-
-        public void LoadData()
+        else
         {
-            if (_dataGridView == null) return;
-
-            if (File.Exists(_filePath))
-            {
-                try
-                {
-                    var json = File.ReadAllText(_filePath);
-                    var contratos = JsonSerializer.Deserialize<List<Contrato>>(json) ?? new List<Contrato>();
-                    _dataGridView.DataSource = contratos;
-                }
-                catch (JsonException ex)
-                {
-                    MessageBox.Show($"Erro ao carregar dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    _dataGridView.DataSource = new List<Contrato>();
-                }
-            }
-            else
-            {
-                _dataGridView.DataSource = new List<Contrato>();
-            }
+            MessageBox.Show("Por favor, selecione um contrato para remover.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
 
-        public void RemoveSelectedContrato()
+    private List<Contrato> GetContratosFromDataSource()
+    {
+        if (File.Exists(_filePath))
         {
-            if (_dataGridView == null || _dataGridView.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Selecione um contrato para remover.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            var selectedRow = _dataGridView.SelectedRows[0];
-            var contrato = (Contrato)selectedRow.DataBoundItem;
-
             var json = File.ReadAllText(_filePath);
-            var contratos = JsonSerializer.Deserialize<List<Contrato>>(json);
-            if (contratos != null)
+            if (!string.IsNullOrWhiteSpace(json))
             {
-                contratos.RemoveAll(c => c.IdImovel == contrato.IdImovel);
-
-                json = JsonSerializer.Serialize(contratos, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(_filePath, json);
-
-                LoadData();
+                return JsonSerializer.Deserialize<List<Contrato>>(json) ?? new List<Contrato>();
             }
         }
+        return new List<Contrato>();
+    }
 
-        public void AddContrato(Contrato contrato)
-        {
-            List<Contrato> contratos;
-            if (File.Exists(_filePath))
-            {
-                var existingJson = File.ReadAllText(_filePath);
-                contratos = JsonSerializer.Deserialize<List<Contrato>>(existingJson) ?? new List<Contrato>();
-            }
-            else
-            {
-                contratos = new List<Contrato>();
-            }
-
-            contratos.Add(contrato);
-
-            var json = JsonSerializer.Serialize(contratos, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(_filePath, json);
-        }
-
-        public List<Imovel> GetImoveis()
-        {
-            // Implement your logic to retrieve the list of Imoveis here
-            // For example, you can fetch it from a database or a static list
-            return new List<Imovel>
-            {
-                new Imovel { IdImovel = 1, Tipo = "Imovel 1" },
-                new Imovel { IdImovel = 2, Tipo = "Imovel 2" }
-            };
-        }
-
-        public List<Inquilino> GetInquilinos()
-        {
-            // Implement your logic to retrieve the list of Inquilinos here
-            // For example, you can fetch it from a database or a static list
-            return new List<Inquilino>
-            {
-                new Inquilino { Id = 1, Nome = "Inquilino 1" },
-                new Inquilino { Id = 2, Nome = "Inquilino 2" }
-            };
-        }
+    private void SaveContratosToDataSource(List<Contrato> contratos)
+    {
+        var json = JsonSerializer.Serialize(contratos);
+        File.WriteAllText(_filePath, json);
     }
 }

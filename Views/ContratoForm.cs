@@ -1,11 +1,10 @@
-﻿
-using MaterialSkin.Controls;
-using TP_POO_R.Controllers;
+﻿using System;
+using System.Windows.Forms;
 using TP_POO_R.ViewsAdicionar;
 
 namespace TP_POO_R.Views
 {
-    public partial class ContratoForm : MaterialForm
+    public partial class ContratoForm : Form
     {
         private readonly ContratoController _controller;
 
@@ -17,18 +16,14 @@ namespace TP_POO_R.Views
 
         private void ContratoForm_Load(object sender, EventArgs e)
         {
-            // Carregar dados na DataGridView
             _controller.LoadData();
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            AddContratoForm addContratoForm = new AddContratoForm();
-            if (addContratoForm.ShowDialog() == DialogResult.OK)
-            {
-                // Recarregar dados após adicionar um novo contrato
-                _controller.LoadData();
-            }
+            var addContratoForm = new AddContratoForm(_controller);
+            addContratoForm.FormClosed += (s, args) => _controller.LoadData(); // Refresh the data after the form is closed
+            addContratoForm.ShowDialog();
         }
 
         private void btnRemover_Click(object sender, EventArgs e)
