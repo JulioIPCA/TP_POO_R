@@ -1,7 +1,12 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+using System.Windows.Forms;
+using TP_POO_R.Models;
+using TP_POO_R.ViewsAdicionar;
 
-
-namespace TP_POO_R.ViewsAdicionar
+namespace TP_POO_R.Controllers
 {
     public class ContratoController
     {
@@ -79,6 +84,28 @@ namespace TP_POO_R.ViewsAdicionar
 
             var json = JsonSerializer.Serialize(contratos, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_filePath, json);
+        }
+
+        public List<Imovel> GetImoveis()
+        {
+            // Implement your logic to retrieve the list of Imoveis here
+            // For example, you can fetch it from a database or a static list
+            return new List<Imovel>
+            {
+                new Imovel { IdImovel = 1, Tipo = "Imovel 1" },
+                new Imovel { IdImovel = 2, Tipo = "Imovel 2" }
+            };
+        }
+
+        public List<Inquilino> GetInquilinos()
+        {
+            // Implement your logic to retrieve the list of Inquilinos here
+            // For example, you can fetch it from a database or a static list
+            return new List<Inquilino>
+            {
+                new Inquilino { Id = 1, Nome = "Inquilino 1" },
+                new Inquilino { Id = 2, Nome = "Inquilino 2" }
+            };
         }
     }
 }

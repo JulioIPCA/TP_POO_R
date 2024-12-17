@@ -1,5 +1,6 @@
-﻿
-using GestaoRendasImoveis.Models;
+﻿using System;
+using System.Windows.Forms;
+using TP_POO_R.Models; // Atualize o namespace para o correto
 
 namespace TP_POO_R.ViewsAdicionar
 {
@@ -59,4 +60,3 @@ namespace TP_POO_R.ViewsAdicionar
         }
     }
 }
-

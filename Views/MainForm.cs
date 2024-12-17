@@ -49,10 +49,10 @@ namespace TP_POO_R.Views
             reciboForm.ShowDialog();
         }
 
-        private void btnSenhorio_Click(object sender, EventArgs e)
+       /* private void btnSenhorio_Click(object sender, EventArgs e)
         {
             SenhorioForm senhorioForm = new SenhorioForm();
             senhorioForm.ShowDialog();
-        }
+        }*/
     }
 }

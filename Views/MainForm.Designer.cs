@@ -95,7 +95,7 @@
             btnRecibo.Text = "Recibo";
             btnRecibo.UseVisualStyleBackColor = true;
             btnRecibo.Click += btnRecibo_Click;
-            // 
+          /*  // 
             // btnSenhorio
             // 
             btnSenhorio.Depth = 0;
@@ -107,7 +107,7 @@
             btnSenhorio.TabIndex = 5;
             btnSenhorio.Text = "Senhorio";
             btnSenhorio.UseVisualStyleBackColor = true;
-            btnSenhorio.Click += btnSenhorio_Click;
+            btnSenhorio.Click += btnSenhorio_Click;*/
             // 
             // MainForm
             // 

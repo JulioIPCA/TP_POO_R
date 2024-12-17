@@ -1,6 +1,5 @@
-﻿
-using System.Text.Json;
-using GestaoRendasImoveis.Models;
+﻿using System.Text.Json;
+using TP_POO_R.Models;
 
 namespace TP_POO_R.Controllers
 {

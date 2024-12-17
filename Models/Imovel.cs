@@ -1,5 +1,4 @@
-﻿
-namespace GestaoRendasImoveis.Models
+﻿namespace TP_POO_R.Models
 {
     public class Imovel
     {

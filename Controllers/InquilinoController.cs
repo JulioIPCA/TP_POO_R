@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using TP_POO_R.Models;
 
@@ -27,7 +29,13 @@ namespace TP_POO_R.Controllers
                 }
                 catch (JsonException ex)
                 {
-                    // Log error
+                    // Registrar o erro
+                    Console.WriteLine($"Erro ao desserializar o arquivo JSON: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    // Registrar outros erros
+                    Console.WriteLine($"Erro ao ler o arquivo JSON: {ex.Message}");
                 }
             }
             return new List<Inquilino>();
@@ -54,3 +62,4 @@ namespace TP_POO_R.Controllers
         }
     }
 }
+

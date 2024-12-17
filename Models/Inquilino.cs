@@ -1,11 +1,22 @@
-﻿namespace TP_POO_R.Models
+﻿using System;
+
+namespace TP_POO_R.Models
 {
-    public class Inquilino
+    public class Inquilino : Pessoa
     {
-        public int Id { get; set; }
-        public string Nome { get; set; } = string.Empty;
-        public string NIF { get; set; } = string.Empty;
-        public string Telefone { get; set; } = string.Empty;
+        private string _nif = string.Empty;
+
+        public string NIF
+        {
+            get => _nif;
+            set
+            {
+                if (value.Length != 9 || !long.TryParse(value, out _))
+                {
+                    throw new ArgumentException("O NIF deve ter exatamente 9 dígitos.");
+                }
+                _nif = value;
+            }
+        }
     }
 }
-

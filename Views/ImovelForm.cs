@@ -1,6 +1,9 @@
-﻿using GestaoRendasImoveis.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using MaterialSkin.Controls;
 using TP_POO_R.Controllers;
+using TP_POO_R.Models;
 using TP_POO_R.ViewsAdicionar;
 
 namespace TP_POO_R.Views
@@ -60,13 +63,16 @@ namespace TP_POO_R.Views
             {
                 // Adicionar o novo imóvel à lista
                 var novoImovel = addImovelForm.NovoImovel;
-                _imoveis.Add(novoImovel);
+                if (novoImovel != null)
+                {
+                    _imoveis.Add(novoImovel);
 
-                // Salvar a lista atualizada de imóveis
-                _imovelController.SalvarImoveis(_imoveis);
+                    // Salvar a lista atualizada de imóveis
+                    _imovelController.SalvarImoveis(_imoveis);
 
-                // Recarregar dados após adicionar um novo imóvel
-                LoadData();
+                    // Recarregar dados após adicionar um novo imóvel
+                    LoadData();
+                }
             }
         }
 
