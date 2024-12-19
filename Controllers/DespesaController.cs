@@ -20,7 +20,6 @@ namespace TP_POO_R.Controllers
             return _despesas.Select(d => new
             {
                 d.IdInquilino,
-                d.IdImovel,
                 d.Data,
                 d.Descricao,
                 d.ValorLuz,

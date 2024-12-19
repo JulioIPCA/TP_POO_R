@@ -3,7 +3,6 @@
     public class Despesa
     {
         public int IdInquilino { get; set; }
-        public int IdImovel { get; set; }
         public DateTime Data { get; set; }
         public string Descricao { get; set; } = string.Empty; // Inicializar como string vazia
         public decimal ValorLuz { get; set; }

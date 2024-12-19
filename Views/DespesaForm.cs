@@ -1,18 +1,23 @@
-﻿
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using TP_POO_R.Controllers;
 using TP_POO_R.ViewsAdicionar;
+using TP_POO_R.Models;
+using System.Linq;
+using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace TP_POO_R.Views
 {
     public partial class DespesaForm : MaterialForm
     {
         private DespesaController _controller;
+        private InquilinoController _inquilinoController;
 
         public DespesaForm()
         {
             InitializeComponent();
             _controller = new DespesaController();
+            _inquilinoController = new InquilinoController();
         }
 
         private void DespesaForm_Load(object sender, EventArgs e)
@@ -30,7 +35,7 @@ namespace TP_POO_R.Views
 
             // Adicionar colunas ao DataGridView
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "IdInquilino", HeaderText = "ID Inquilino" });
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "IdImovel", HeaderText = "ID Imóvel" });
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "NomeInquilino", HeaderText = "Nome Inquilino" });
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Data", HeaderText = "Data" });
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Descricao", HeaderText = "Descrição" });
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "ValorLuz", HeaderText = "Valor Luz" });
@@ -42,7 +47,23 @@ namespace TP_POO_R.Views
         private void LoadData()
         {
             var despesas = _controller.LoadDespesas();
-            dataGridView.DataSource = despesas;
+            var inquilinos = _inquilinoController.GetInquilinos();
+
+            var despesasComInquilinos = from despesa in despesas
+                                        join inquilino in inquilinos on despesa.IdInquilino equals inquilino.Id
+                                        select new
+                                        {
+                                            despesa.IdInquilino,
+                                            NomeInquilino = inquilino.Nome,
+                                            despesa.Data,
+                                            despesa.Descricao,
+                                            despesa.ValorLuz,
+                                            despesa.ValorGas,
+                                            despesa.ValorAgua,
+                                            despesa.ValorTotal
+                                        };
+
+            dataGridView.DataSource = despesasComInquilinos.ToList();
         }
 
         private void btnAdicionar_Click(object sender, EventArgs e)

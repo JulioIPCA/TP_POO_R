@@ -1,13 +1,14 @@
 ﻿using MaterialSkin.Controls;
 using MaterialSkin;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace TP_POO_R.ViewsAdicionar
 {
     partial class AddDespesa : MaterialForm
     {
         private System.ComponentModel.IContainer components = null;
-        private MaterialSingleLineTextField txtIdInquilino;
-        private MaterialSingleLineTextField txtIdImovel;
+        private ComboBox cmbInquilinos;
         private DateTimePicker dtpData;
         private MaterialSingleLineTextField txtDescricao;
         private MaterialSingleLineTextField txtValorLuz;
@@ -36,8 +37,7 @@ namespace TP_POO_R.ViewsAdicionar
                 TextShade.WHITE
             );
 
-            txtIdInquilino = new MaterialSingleLineTextField();
-            txtIdImovel = new MaterialSingleLineTextField();
+            cmbInquilinos = new ComboBox();
             dtpData = new DateTimePicker();
             txtDescricao = new MaterialSingleLineTextField();
             txtValorLuz = new MaterialSingleLineTextField();
@@ -47,21 +47,12 @@ namespace TP_POO_R.ViewsAdicionar
             btnCancelar = new MaterialRaisedButton();
             SuspendLayout();
             // 
-            // txtIdInquilino
+            // cmbInquilinos
             // 
-            txtIdInquilino.Hint = "ID Inquilino";
-            txtIdInquilino.Location = new Point(12, 70);
-            txtIdInquilino.Name = "txtIdInquilino";
-            txtIdInquilino.Size = new Size(200, 23);
-            txtIdInquilino.TabIndex = 0;
-            // 
-            // txtIdImovel
-            // 
-            txtIdImovel.Hint = "ID Imóvel";
-            txtIdImovel.Location = new Point(12, 100);
-            txtIdImovel.Name = "txtIdImovel";
-            txtIdImovel.Size = new Size(200, 23);
-            txtIdImovel.TabIndex = 1;
+            cmbInquilinos.Location = new Point(12, 70);
+            cmbInquilinos.Name = "cmbInquilinos";
+            cmbInquilinos.Size = new Size(200, 23);
+            cmbInquilinos.TabIndex = 0;
             // 
             // dtpData
             // 
@@ -140,8 +131,7 @@ namespace TP_POO_R.ViewsAdicionar
             Controls.Add(txtValorLuz);
             Controls.Add(txtDescricao);
             Controls.Add(dtpData);
-            Controls.Add(txtIdImovel);
-            Controls.Add(txtIdInquilino);
+            Controls.Add(cmbInquilinos);
             Name = "AddDespesa";
             Text = "Adicionar Despesa";
             ResumeLayout(false);
