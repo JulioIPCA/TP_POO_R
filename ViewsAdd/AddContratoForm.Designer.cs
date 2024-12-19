@@ -3,20 +3,16 @@
     partial class AddContratoForm
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.ComboBox cmbIdImovel;
-        private System.Windows.Forms.ComboBox cmbIdInquilino;
-        private System.Windows.Forms.Button btnSalvar;
-        private System.Windows.Forms.Button btnCancelar;
-        private System.Windows.Forms.DateTimePicker dtpData;
-        private System.Windows.Forms.DateTimePicker dtpDataCessacao;
-        private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.TextBox txtValor;
-        private System.Windows.Forms.Label lblIdImovel;
-        private System.Windows.Forms.Label lblIdInquilino;
-        private System.Windows.Forms.Label lblData;
-        private System.Windows.Forms.Label lblNome;
-        private System.Windows.Forms.Label lblValor;
-        private System.Windows.Forms.Label lblDataCessacao;
+        private ComboBox cmbInquilinos;
+        private DateTimePicker dtpDataInicio;
+        private DateTimePicker dtpDataFim;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtNome;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtValor;
+        private MaterialSkin.Controls.MaterialRaisedButton btnSalvar;
+        private MaterialSkin.Controls.MaterialRaisedButton btnCancelar;
+        private MaterialSkin.Controls.MaterialLabel lblInquilino;
+        private MaterialSkin.Controls.MaterialLabel lblDataInicio;
+        private MaterialSkin.Controls.MaterialLabel lblDataFim;
 
         protected override void Dispose(bool disposing)
         {
@@ -29,159 +25,151 @@
 
         private void InitializeComponent()
         {
-            this.cmbIdImovel = new System.Windows.Forms.ComboBox();
-            this.cmbIdInquilino = new System.Windows.Forms.ComboBox();
-            this.btnSalvar = new System.Windows.Forms.Button();
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.dtpData = new System.Windows.Forms.DateTimePicker();
-            this.dtpDataCessacao = new System.Windows.Forms.DateTimePicker();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.txtValor = new System.Windows.Forms.TextBox();
-            this.lblIdImovel = new System.Windows.Forms.Label();
-            this.lblIdInquilino = new System.Windows.Forms.Label();
-            this.lblData = new System.Windows.Forms.Label();
-            this.lblNome = new System.Windows.Forms.Label();
-            this.lblValor = new System.Windows.Forms.Label();
-            this.lblDataCessacao = new System.Windows.Forms.Label();
+            this.cmbInquilinos = new System.Windows.Forms.ComboBox();
+            this.dtpDataInicio = new System.Windows.Forms.DateTimePicker();
+            this.dtpDataFim = new System.Windows.Forms.DateTimePicker();
+            this.txtNome = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.txtValor = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.btnSalvar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.btnCancelar = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.lblInquilino = new MaterialSkin.Controls.MaterialLabel();
+            this.lblDataInicio = new MaterialSkin.Controls.MaterialLabel();
+            this.lblDataFim = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
             // 
-            // cmbIdImovel
+            // cmbInquilinos
             // 
-            this.cmbIdImovel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbIdImovel.FormattingEnabled = true;
-            this.cmbIdImovel.Location = new System.Drawing.Point(120, 30);
-            this.cmbIdImovel.Name = "cmbIdImovel";
-            this.cmbIdImovel.Size = new System.Drawing.Size(200, 21);
-            this.cmbIdImovel.TabIndex = 0;
+            this.cmbInquilinos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbInquilinos.FormattingEnabled = true;
+            this.cmbInquilinos.Location = new System.Drawing.Point(99, 119);
+            this.cmbInquilinos.Name = "cmbInquilinos";
+            this.cmbInquilinos.Size = new System.Drawing.Size(200, 23);
+            this.cmbInquilinos.TabIndex = 0;
             // 
-            // cmbIdInquilino
+            // dtpDataInicio
             // 
-            this.cmbIdInquilino.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbIdInquilino.FormattingEnabled = true;
-            this.cmbIdInquilino.Location = new System.Drawing.Point(120, 70);
-            this.cmbIdInquilino.Name = "cmbIdInquilino";
-            this.cmbIdInquilino.Size = new System.Drawing.Size(200, 21);
-            this.cmbIdInquilino.TabIndex = 1;
+            this.dtpDataInicio.Location = new System.Drawing.Point(99, 177);
+            this.dtpDataInicio.Name = "dtpDataInicio";
+            this.dtpDataInicio.Size = new System.Drawing.Size(200, 23);
+            this.dtpDataInicio.TabIndex = 1;
+            // 
+            // dtpDataFim
+            // 
+            this.dtpDataFim.Location = new System.Drawing.Point(99, 235);
+            this.dtpDataFim.Name = "dtpDataFim";
+            this.dtpDataFim.Size = new System.Drawing.Size(200, 23);
+            this.dtpDataFim.TabIndex = 2;
+            // 
+            // txtNome
+            // 
+            this.txtNome.Depth = 0;
+            this.txtNome.Hint = "Nome";
+            this.txtNome.Location = new System.Drawing.Point(99, 264);
+            this.txtNome.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtNome.Name = "txtNome";
+            this.txtNome.PasswordChar = '\0';
+            this.txtNome.SelectedText = "";
+            this.txtNome.SelectionLength = 0;
+            this.txtNome.SelectionStart = 0;
+            this.txtNome.Size = new System.Drawing.Size(200, 23);
+            this.txtNome.TabIndex = 3;
+            this.txtNome.UseSystemPasswordChar = false;
+            // 
+            // txtValor
+            // 
+            this.txtValor.Depth = 0;
+            this.txtValor.Hint = "Valor";
+            this.txtValor.Location = new System.Drawing.Point(99, 293);
+            this.txtValor.MouseState = MaterialSkin.MouseState.HOVER;
+            this.txtValor.Name = "txtValor";
+            this.txtValor.PasswordChar = '\0';
+            this.txtValor.SelectedText = "";
+            this.txtValor.SelectionLength = 0;
+            this.txtValor.SelectionStart = 0;
+            this.txtValor.Size = new System.Drawing.Size(200, 23);
+            this.txtValor.TabIndex = 4;
+            this.txtValor.UseSystemPasswordChar = false;
             // 
             // btnSalvar
             // 
-            this.btnSalvar.Location = new System.Drawing.Point(120, 250);
+            this.btnSalvar.Depth = 0;
+            this.btnSalvar.Location = new System.Drawing.Point(90, 322);
+            this.btnSalvar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnSalvar.Name = "btnSalvar";
+            this.btnSalvar.Primary = true;
             this.btnSalvar.Size = new System.Drawing.Size(75, 23);
-            this.btnSalvar.TabIndex = 2;
+            this.btnSalvar.TabIndex = 5;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(245, 250);
+            this.btnCancelar.Depth = 0;
+            this.btnCancelar.Location = new System.Drawing.Point(212, 322);
+            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
             this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Primary = true;
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 3;
+            this.btnCancelar.TabIndex = 6;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // dtpData
+            // lblInquilino
             // 
-            this.dtpData.Location = new System.Drawing.Point(120, 110);
-            this.dtpData.Name = "dtpData";
-            this.dtpData.Size = new System.Drawing.Size(200, 20);
-            this.dtpData.TabIndex = 4;
+            this.lblInquilino.AutoSize = true;
+            this.lblInquilino.Depth = 0;
+            this.lblInquilino.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblInquilino.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblInquilino.Location = new System.Drawing.Point(99, 97);
+            this.lblInquilino.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblInquilino.Name = "lblInquilino";
+            this.lblInquilino.Size = new System.Drawing.Size(68, 19);
+            this.lblInquilino.TabIndex = 7;
+            this.lblInquilino.Text = "Inquilino";
             // 
-            // dtpDataCessacao
+            // lblDataInicio
             // 
-            this.dtpDataCessacao.Location = new System.Drawing.Point(120, 190);
-            this.dtpDataCessacao.Name = "dtpDataCessacao";
-            this.dtpDataCessacao.Size = new System.Drawing.Size(200, 20);
-            this.dtpDataCessacao.TabIndex = 5;
+            this.lblDataInicio.AutoSize = true;
+            this.lblDataInicio.Depth = 0;
+            this.lblDataInicio.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblDataInicio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblDataInicio.Location = new System.Drawing.Point(99, 155);
+            this.lblDataInicio.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblDataInicio.Name = "lblDataInicio";
+            this.lblDataInicio.Size = new System.Drawing.Size(79, 19);
+            this.lblDataInicio.TabIndex = 8;
+            this.lblDataInicio.Text = "Data Início";
             // 
-            // txtNome
+            // lblDataFim
             // 
-            this.txtNome.Location = new System.Drawing.Point(120, 150);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.Size = new System.Drawing.Size(200, 20);
-            this.txtNome.TabIndex = 6;
-            // 
-            // txtValor
-            // 
-            this.txtValor.Location = new System.Drawing.Point(120, 230);
-            this.txtValor.Name = "txtValor";
-            this.txtValor.Size = new System.Drawing.Size(200, 20);
-            this.txtValor.TabIndex = 7;
-            // 
-            // lblIdImovel
-            // 
-            this.lblIdImovel.AutoSize = true;
-            this.lblIdImovel.Location = new System.Drawing.Point(30, 30);
-            this.lblIdImovel.Name = "lblIdImovel";
-            this.lblIdImovel.Size = new System.Drawing.Size(50, 13);
-            this.lblIdImovel.TabIndex = 8;
-            this.lblIdImovel.Text = "Id Imóvel";
-            // 
-            // lblIdInquilino
-            // 
-            this.lblIdInquilino.AutoSize = true;
-            this.lblIdInquilino.Location = new System.Drawing.Point(30, 70);
-            this.lblIdInquilino.Name = "lblIdInquilino";
-            this.lblIdInquilino.Size = new System.Drawing.Size(58, 13);
-            this.lblIdInquilino.TabIndex = 9;
-            this.lblIdInquilino.Text = "Id Inquilino";
-            // 
-            // lblData
-            // 
-            this.lblData.AutoSize = true;
-            this.lblData.Location = new System.Drawing.Point(30, 110);
-            this.lblData.Name = "lblData";
-            this.lblData.Size = new System.Drawing.Size(30, 13);
-            this.lblData.TabIndex = 10;
-            this.lblData.Text = "Data";
-            // 
-            // lblNome
-            // 
-            this.lblNome.AutoSize = true;
-            this.lblNome.Location = new System.Drawing.Point(30, 150);
-            this.lblNome.Name = "lblNome";
-            this.lblNome.Size = new System.Drawing.Size(35, 13);
-            this.lblNome.TabIndex = 11;
-            this.lblNome.Text = "Nome";
-            // 
-            // lblValor
-            // 
-            this.lblValor.AutoSize = true;
-            this.lblValor.Location = new System.Drawing.Point(30, 230);
-            this.lblValor.Name = "lblValor";
-            this.lblValor.Size = new System.Drawing.Size(31, 13);
-            this.lblValor.TabIndex = 12;
-            this.lblValor.Text = "Valor";
-            // 
-            // lblDataCessacao
-            // 
-            this.lblDataCessacao.AutoSize = true;
-            this.lblDataCessacao.Location = new System.Drawing.Point(30, 190);
-            this.lblDataCessacao.Name = "lblDataCessacao";
-            this.lblDataCessacao.Size = new System.Drawing.Size(84, 13);
-            this.lblDataCessacao.TabIndex = 13;
-            this.lblDataCessacao.Text = "Data Cessação";
+            this.lblDataFim.AutoSize = true;
+            this.lblDataFim.Depth = 0;
+            this.lblDataFim.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblDataFim.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblDataFim.Location = new System.Drawing.Point(99, 213);
+            this.lblDataFim.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblDataFim.Name = "lblDataFim";
+            this.lblDataFim.Size = new System.Drawing.Size(68, 19);
+            this.lblDataFim.TabIndex = 9;
+            this.lblDataFim.Text = "Data Fim";
             // 
             // AddContratoForm
             // 
-            this.ClientSize = new System.Drawing.Size(384, 311);
-            this.Controls.Add(this.lblDataCessacao);
-            this.Controls.Add(this.lblValor);
-            this.Controls.Add(this.lblNome);
-            this.Controls.Add(this.lblData);
-            this.Controls.Add(this.lblIdInquilino);
-            this.Controls.Add(this.lblIdImovel);
-            this.Controls.Add(this.txtValor);
-            this.Controls.Add(this.txtNome);
-            this.Controls.Add(this.dtpDataCessacao);
-            this.Controls.Add(this.dtpData);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(411, 361);
+            this.Controls.Add(this.lblDataFim);
+            this.Controls.Add(this.lblDataInicio);
+            this.Controls.Add(this.lblInquilino);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSalvar);
-            this.Controls.Add(this.cmbIdInquilino);
-            this.Controls.Add(this.cmbIdImovel);
+            this.Controls.Add(this.txtValor);
+            this.Controls.Add(this.txtNome);
+            this.Controls.Add(this.dtpDataFim);
+            this.Controls.Add(this.dtpDataInicio);
+            this.Controls.Add(this.cmbInquilinos);
             this.Name = "AddContratoForm";
             this.Text = "Adicionar Contrato";
             this.ResumeLayout(false);

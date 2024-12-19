@@ -37,7 +37,7 @@ public class ContratoController
         {
             var contratos = GetContratosFromDataSource();
             var selectedContrato = (Contrato)_dataGridView.SelectedRows[0].DataBoundItem;
-            var contratoToRemove = contratos.FirstOrDefault(c => c.IdImovel == selectedContrato.IdImovel && c.Data == selectedContrato.Data);
+            var contratoToRemove = contratos.FirstOrDefault(c => c.IdInquilino == selectedContrato.IdInquilino && c.Data == selectedContrato.Data);
             if (contratoToRemove != null)
             {
                 contratos.Remove(contratoToRemove);

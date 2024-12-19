@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TP_POO_R.Models
+﻿namespace TP_POO_R.Models
 {
     public class Inquilino : Pessoa
     {
@@ -18,5 +16,6 @@ namespace TP_POO_R.Models
                 _nif = value;
             }
         }
+        public int IdImovel { get; set; }
     }
 }

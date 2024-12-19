@@ -1,4 +1,7 @@
-﻿using System.Text.Json;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using TP_POO_R.Models;
 
 namespace TP_POO_R.Controllers
@@ -36,6 +39,12 @@ namespace TP_POO_R.Controllers
         {
             var json = JsonSerializer.Serialize(imoveis, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_filePath, json);
+        }
+
+        // Adiciona o método ObterTodosImoveis que chama CarregarImoveis
+        public List<Imovel> ObterTodosImoveis()
+        {
+            return CarregarImoveis();
         }
     }
 }

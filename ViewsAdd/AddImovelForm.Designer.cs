@@ -1,15 +1,20 @@
-﻿namespace TP_POO_R.ViewsAdicionar
+﻿using MaterialSkin.Controls;
+using MaterialSkin;
+using System.Drawing;
+using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
+
+namespace TP_POO_R.ViewsAdicionar
 {
-    partial class AddImovelForm
+    partial class AddImovelForm : MaterialForm
     {
         private System.ComponentModel.IContainer components = null;
-        private MaterialSkin.Controls.MaterialRaisedButton btnSalvar;
-        private MaterialSkin.Controls.MaterialRaisedButton btnCancelar;
-        private System.Windows.Forms.TextBox txtProprietarioId;
-        private System.Windows.Forms.TextBox txtTipo;
-        private System.Windows.Forms.TextBox txtEndereco;
-        private System.Windows.Forms.TextBox txtValor;
-        private System.Windows.Forms.TextBox txtRendaMensal;
+        private MaterialSingleLineTextField txtTipo;
+        private MaterialSingleLineTextField txtEndereco;
+        private MaterialSingleLineTextField txtNQuartos;
+        private MaterialRaisedButton btnSalvar;
+        private MaterialRaisedButton btnCancelar;
 
         protected override void Dispose(bool disposing)
         {
@@ -20,28 +25,69 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
-            btnSalvar = new MaterialSkin.Controls.MaterialRaisedButton();
-            btnCancelar = new MaterialSkin.Controls.MaterialRaisedButton();
-            txtProprietarioId = new TextBox();
-            txtTipo = new TextBox();
-            txtEndereco = new TextBox();
-            txtValor = new TextBox();
-            txtRendaMensal = new TextBox();
+            txtTipo = new MaterialSingleLineTextField();
+            txtEndereco = new MaterialSingleLineTextField();
+            txtNQuartos = new MaterialSingleLineTextField();
+            btnSalvar = new MaterialRaisedButton();
+            btnCancelar = new MaterialRaisedButton();
             SuspendLayout();
+            // 
+            // txtTipo
+            // 
+            txtTipo.Depth = 0;
+            txtTipo.Hint = "Tipo";
+            txtTipo.Location = new Point(99, 119);
+            txtTipo.MouseState = MouseState.HOVER;
+            txtTipo.Name = "txtTipo";
+            txtTipo.PasswordChar = '\0';
+            txtTipo.SelectedText = "";
+            txtTipo.SelectionLength = 0;
+            txtTipo.SelectionStart = 0;
+            txtTipo.Size = new Size(200, 23);
+            txtTipo.TabIndex = 0;
+            txtTipo.UseSystemPasswordChar = false;
+            // 
+            // txtEndereco
+            // 
+            txtEndereco.Depth = 0;
+            txtEndereco.Hint = "Endereço";
+            txtEndereco.Location = new Point(99, 148);
+            txtEndereco.MouseState = MouseState.HOVER;
+            txtEndereco.Name = "txtEndereco";
+            txtEndereco.PasswordChar = '\0';
+            txtEndereco.SelectedText = "";
+            txtEndereco.SelectionLength = 0;
+            txtEndereco.SelectionStart = 0;
+            txtEndereco.Size = new Size(200, 23);
+            txtEndereco.TabIndex = 1;
+            txtEndereco.UseSystemPasswordChar = false;
+            // 
+            // txtNQuartos
+            // 
+            txtNQuartos.Depth = 0;
+            txtNQuartos.Hint = "Número de Quartos";
+            txtNQuartos.Location = new Point(99, 177);
+            txtNQuartos.MouseState = MouseState.HOVER;
+            txtNQuartos.Name = "txtNQuartos";
+            txtNQuartos.PasswordChar = '\0';
+            txtNQuartos.SelectedText = "";
+            txtNQuartos.SelectionLength = 0;
+            txtNQuartos.SelectionStart = 0;
+            txtNQuartos.Size = new Size(200, 23);
+            txtNQuartos.TabIndex = 2;
+            txtNQuartos.UseSystemPasswordChar = false;
             // 
             // btnSalvar
             // 
             btnSalvar.Depth = 0;
-            btnSalvar.Location = new Point(50, 202);
-            btnSalvar.MouseState = MaterialSkin.MouseState.HOVER;
+            btnSalvar.Location = new Point(90, 220);
+            btnSalvar.MouseState = MouseState.HOVER;
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Primary = true;
-            btnSalvar.Size = new Size(100, 36);
-            btnSalvar.TabIndex = 5;
+            btnSalvar.Size = new Size(75, 23);
+            btnSalvar.TabIndex = 3;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
             btnSalvar.Click += btnSalvar_Click;
@@ -49,74 +95,29 @@
             // btnCancelar
             // 
             btnCancelar.Depth = 0;
-            btnCancelar.Location = new Point(210, 202);
-            btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
+            btnCancelar.Location = new Point(212, 220);
+            btnCancelar.MouseState = MouseState.HOVER;
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Primary = true;
-            btnCancelar.Size = new Size(100, 36);
-            btnCancelar.TabIndex = 6;
+            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.TabIndex = 4;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
-            // 
-            // txtProprietarioId
-            // 
-            txtProprietarioId.Location = new Point(50, 12);
-            txtProprietarioId.Name = "txtProprietarioId";
-            txtProprietarioId.PlaceholderText = "Proprietário ID";
-            txtProprietarioId.Size = new Size(260, 23);
-            txtProprietarioId.TabIndex = 0;
-            // 
-            // txtTipo
-            // 
-            txtTipo.Location = new Point(50, 41);
-            txtTipo.Name = "txtTipo";
-            txtTipo.PlaceholderText = "Tipo";
-            txtTipo.Size = new Size(260, 23);
-            txtTipo.TabIndex = 1;
-            // 
-            // txtEndereco
-            // 
-            txtEndereco.Location = new Point(50, 70);
-            txtEndereco.Name = "txtEndereco";
-            txtEndereco.PlaceholderText = "Endereço";
-            txtEndereco.Size = new Size(260, 23);
-            txtEndereco.TabIndex = 2;
-            // 
-            // txtValor
-            // 
-            txtValor.Location = new Point(50, 99);
-            txtValor.Name = "txtValor";
-            txtValor.PlaceholderText = "Valor";
-            txtValor.Size = new Size(260, 23);
-            txtValor.TabIndex = 3;
-            // 
-            // txtRendaMensal
-            // 
-            txtRendaMensal.Location = new Point(50, 139);
-            txtRendaMensal.Name = "txtRendaMensal";
-            txtRendaMensal.PlaceholderText = "Renda Mensal";
-            txtRendaMensal.Size = new Size(260, 23);
-            txtRendaMensal.TabIndex = 4;
             // 
             // AddImovelForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(379, 303);
-            Controls.Add(txtRendaMensal);
-            Controls.Add(txtValor);
-            Controls.Add(txtEndereco);
-            Controls.Add(txtTipo);
-            Controls.Add(txtProprietarioId);
+            ClientSize = new Size(400, 316);
             Controls.Add(btnCancelar);
             Controls.Add(btnSalvar);
+            Controls.Add(txtNQuartos);
+            Controls.Add(txtEndereco);
+            Controls.Add(txtTipo);
             Name = "AddImovelForm";
             Text = "Adicionar Imóvel";
             ResumeLayout(false);
-            PerformLayout();
         }
-
-        #endregion
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using MaterialSkin.Controls;
 using TP_POO_R.Controllers;
@@ -35,11 +36,9 @@ namespace TP_POO_R.Views
 
             // Adicionar colunas ao DataGridView
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "IdImovel", HeaderText = "ID Imóvel" });
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "ProprietarioId", HeaderText = "Proprietário ID" });
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Tipo", HeaderText = "Tipo" });
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Endereco", HeaderText = "Endereço" });
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Valor", HeaderText = "Valor" });
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "RendaMensal", HeaderText = "Renda Mensal" });
+            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Nquartos", HeaderText = "Número de Quartos" });
         }
 
         private void LoadData()
@@ -65,6 +64,9 @@ namespace TP_POO_R.Views
                 var novoImovel = addImovelForm.NovoImovel;
                 if (novoImovel != null)
                 {
+                    // Garantir que o ID do novo imóvel seja o menor número inteiro positivo disponível
+                    novoImovel.IdImovel = GetNextAvailableId();
+
                     _imoveis.Add(novoImovel);
 
                     // Salvar a lista atualizada de imóveis
@@ -74,6 +76,29 @@ namespace TP_POO_R.Views
                     LoadData();
                 }
             }
+        }
+
+        private int GetNextAvailableId()
+        {
+            if (_imoveis.Count == 0)
+                return 1;
+
+            var idsExistentes = _imoveis.Select(i => i.IdImovel).OrderBy(id => id).ToList();
+            int nextId = 1;
+
+            foreach (var id in idsExistentes)
+            {
+                if (id == nextId)
+                {
+                    nextId++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return nextId;
         }
 
         private void btnRemover_Click(object sender, EventArgs e)

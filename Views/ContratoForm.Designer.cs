@@ -69,7 +69,7 @@
             Controls.Add(btnRemover);
             Controls.Add(btnAdicionar);
             Name = "ContratoForm";
-            Text = "Contrato";
+            Text = "Gerenciar Contratos";
             Load += ContratoForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);

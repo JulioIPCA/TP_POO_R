@@ -3,9 +3,9 @@
     partial class DespesaForm
     {
         private System.ComponentModel.IContainer components = null;
+        private MaterialSkin.Controls.MaterialRaisedButton btnAdicionar;
+        private MaterialSkin.Controls.MaterialRaisedButton btnRemover;
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Button btnAdicionar;
-        private System.Windows.Forms.Button btnRemover;
 
         protected override void Dispose(bool disposing)
         {
@@ -16,59 +16,65 @@
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
+
         private void InitializeComponent()
         {
+            btnAdicionar = new MaterialSkin.Controls.MaterialRaisedButton();
+            btnRemover = new MaterialSkin.Controls.MaterialRaisedButton();
             dataGridView = new DataGridView();
-            btnAdicionar = new Button();
-            btnRemover = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView
-            // 
-            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Location = new Point(31, 149);
-            dataGridView.Margin = new Padding(4, 3, 4, 3);
-            dataGridView.Name = "dataGridView";
-            dataGridView.Size = new Size(870, 369);
-            dataGridView.TabIndex = 0;
-            // 
             // btnAdicionar
             // 
-            btnAdicionar.Location = new Point(680, 116);
-            btnAdicionar.Margin = new Padding(4, 3, 4, 3);
+            btnAdicionar.Depth = 0;
+            btnAdicionar.Location = new Point(367, 92);
+            btnAdicionar.MouseState = MaterialSkin.MouseState.HOVER;
             btnAdicionar.Name = "btnAdicionar";
-            btnAdicionar.Size = new Size(88, 27);
-            btnAdicionar.TabIndex = 1;
+            btnAdicionar.Primary = true;
+            btnAdicionar.Size = new Size(100, 36);
+            btnAdicionar.TabIndex = 0;
             btnAdicionar.Text = "Adicionar";
             btnAdicionar.UseVisualStyleBackColor = true;
             btnAdicionar.Click += btnAdicionar_Click;
             // 
             // btnRemover
             // 
-            btnRemover.Location = new Point(794, 116);
-            btnRemover.Margin = new Padding(4, 3, 4, 3);
+            btnRemover.Depth = 0;
+            btnRemover.Location = new Point(521, 92);
+            btnRemover.MouseState = MaterialSkin.MouseState.HOVER;
             btnRemover.Name = "btnRemover";
-            btnRemover.Size = new Size(88, 27);
-            btnRemover.TabIndex = 2;
+            btnRemover.Primary = true;
+            btnRemover.Size = new Size(100, 36);
+            btnRemover.TabIndex = 1;
             btnRemover.Text = "Remover";
             btnRemover.UseVisualStyleBackColor = true;
             btnRemover.Click += btnRemover_Click;
+            // 
+            // dataGridView
+            // 
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Location = new Point(34, 152);
+            dataGridView.Name = "dataGridView";
+            dataGridView.Size = new Size(600, 300);
+            dataGridView.TabIndex = 2;
             // 
             // DespesaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(915, 532);
+            ClientSize = new Size(891, 544);
+            Controls.Add(dataGridView);
             Controls.Add(btnRemover);
             Controls.Add(btnAdicionar);
-            Controls.Add(dataGridView);
-            Margin = new Padding(4, 3, 4, 3);
             Name = "DespesaForm";
             Text = "Gerenciar Despesas";
             Load += DespesaForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
+
+        #endregion
     }
 }

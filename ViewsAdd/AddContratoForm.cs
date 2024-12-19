@@ -1,84 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-using System.Windows.Forms;
+﻿using MaterialSkin.Controls;
 using TP_POO_R.Models;
+using TP_POO_R.Controllers;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace TP_POO_R.ViewsAdicionar
 {
-    public partial class AddContratoForm : Form
+    public partial class AddContratoForm : MaterialForm
     {
-        private readonly string _filePathImoveis;
-        private readonly string _filePathInquilinos;
-        private readonly ContratoController _controller;
+        public Contrato? NovoContrato { get; private set; } // Tornar anulável
+        private readonly InquilinoController _inquilinoController;
 
-        public AddContratoForm(ContratoController controller)
+        // Construtor que aceita um InquilinoController como argumento
+        public AddContratoForm(InquilinoController inquilinoController)
         {
             InitializeComponent();
-            _filePathImoveis = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imoveis.json");
-            _filePathInquilinos = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "inquilinos.json");
-            _controller = controller;
-            LoadImoveis();
+            _inquilinoController = inquilinoController;
             LoadInquilinos();
-        }
-
-        private void LoadImoveis()
-        {
-            if (File.Exists(_filePathImoveis))
-            {
-                var json = File.ReadAllText(_filePathImoveis);
-                if (!string.IsNullOrWhiteSpace(json))
-                {
-                    var imoveis = JsonSerializer.Deserialize<List<Imovel>>(json) ?? new List<Imovel>();
-                    cmbIdImovel.DataSource = imoveis;
-                    cmbIdImovel.DisplayMember = "IdImovel";
-                    cmbIdImovel.ValueMember = "IdImovel";
-                }
-            }
         }
 
         private void LoadInquilinos()
         {
-            if (File.Exists(_filePathInquilinos))
+            var inquilinos = _inquilinoController.GetInquilinos()
+                .Select(i => new { i.Id, i.Nome })
+                .ToList();
+
+            if (inquilinos.Count == 0)
             {
-                var json = File.ReadAllText(_filePathInquilinos);
-                if (!string.IsNullOrWhiteSpace(json))
-                {
-                    var inquilinos = JsonSerializer.Deserialize<List<Inquilino>>(json) ?? new List<Inquilino>();
-                    cmbIdInquilino.DataSource = inquilinos;
-                    cmbIdInquilino.DisplayMember = "Id";
-                    cmbIdInquilino.ValueMember = "Id";
-                }
+                MessageBox.Show("Nenhum inquilino encontrado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            cmbInquilinos.DataSource = inquilinos;
+            cmbInquilinos.DisplayMember = "Nome";
+            cmbInquilinos.ValueMember = "Id";
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            if (cmbIdImovel.SelectedValue == null || cmbIdInquilino.SelectedValue == null)
+            try
             {
-                MessageBox.Show("Por favor, selecione um imóvel e um inquilino.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (cmbInquilinos.SelectedValue == null)
+                {
+                    MessageBox.Show("Por favor, selecione um inquilino.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Criar uma nova instância de Contrato com os dados do formulário
+                NovoContrato = new Contrato
+                {
+                    IdInquilino = cmbInquilinos.SelectedValue.ToString(),
+                    Data = dtpDataInicio.Value,
+                    DataCessacao = dtpDataFim.Value,
+                    Nome = txtNome.Text,
+                    Valor = txtValor.Text
+                };
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
-
-            var contrato = new Contrato
+            catch (FormatException)
             {
-                IdImovel = cmbIdImovel.SelectedValue.ToString(),
-                IdInquilino = cmbIdInquilino.SelectedValue.ToString(),
-                Data = dtpData.Value,
-                Nome = txtNome.Text,
-                Valor = txtValor.Text,
-                DataCessacao = dtpDataCessacao.Value
-            };
-
-            _controller.AddContrato(contrato);
-            MessageBox.Show("Contrato adicionado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Close();
+                MessageBox.Show("Por favor, insira valores válidos nos campos numéricos.", "Erro de Formato", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Close();
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

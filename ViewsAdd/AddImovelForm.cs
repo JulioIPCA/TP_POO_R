@@ -1,12 +1,14 @@
-﻿using System;
+﻿using MaterialSkin.Controls;
+using System;
 using System.Windows.Forms;
 using TP_POO_R.Models; // Atualize o namespace para o correto
 
 namespace TP_POO_R.ViewsAdicionar
 {
-    public partial class AddImovelForm : Form
+    public partial class AddImovelForm : MaterialForm
     {
         public Imovel? NovoImovel { get; private set; }
+        private static int _nextIdImovel = 1; // Variável estática para gerar IDs sequenciais
 
         public AddImovelForm()
         {
@@ -20,11 +22,9 @@ namespace TP_POO_R.ViewsAdicionar
                 NovoImovel = new Imovel
                 {
                     IdImovel = GerarNovoIdImovel(), // Método para gerar um novo IdImovel
-                    ProprietarioId = int.Parse(txtProprietarioId.Text),
                     Tipo = txtTipo.Text,
                     Endereco = txtEndereco.Text,
-                    Valor = decimal.Parse(txtValor.Text),
-                    RendaMensal = decimal.Parse(txtRendaMensal.Text)
+                    NQuartos = decimal.Parse(txtNQuartos.Text)
                 };
 
                 DialogResult = DialogResult.OK;
@@ -44,19 +44,14 @@ namespace TP_POO_R.ViewsAdicionar
 
         private bool ValidarCampos()
         {
-            return !string.IsNullOrWhiteSpace(txtProprietarioId.Text) &&
-                   !string.IsNullOrWhiteSpace(txtTipo.Text) &&
+            return !string.IsNullOrWhiteSpace(txtTipo.Text) &&
                    !string.IsNullOrWhiteSpace(txtEndereco.Text) &&
-                   decimal.TryParse(txtValor.Text, out _) &&
-                   decimal.TryParse(txtRendaMensal.Text, out _);
+                   decimal.TryParse(txtNQuartos.Text, out _);
         }
 
         private int GerarNovoIdImovel()
         {
-            // Implementar lógica para gerar um novo IdImovel único
-            // Por exemplo, você pode buscar o maior IdImovel existente e incrementar
-            // Aqui, apenas retornamos um valor fixo para simplificação
-            return new Random().Next(1, 10000); // Exemplo de geração de ID
+            return _nextIdImovel++; // Incrementa o ID para o próximo imóvel
         }
     }
 }

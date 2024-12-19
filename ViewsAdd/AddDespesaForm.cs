@@ -41,7 +41,7 @@ namespace TP_POO_R.ViewsAdicionar
                 // Criar uma nova instância de Despesa com os dados do formulário
                 NovaDespesa = new Despesa
                 {
-                    IdInquilino = (int)cmbInquilinos.SelectedValue,
+                    IdInquilino = (int?)(cmbInquilinos.SelectedValue as int?) ?? 0,
                     Data = dtpData.Value,
                     Descricao = txtDescricao.Text,
                     ValorLuz = decimal.Parse(txtValorLuz.Text),
