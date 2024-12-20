@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using TP_POO_R.Models;
 
@@ -29,13 +30,13 @@ namespace TP_POO_R.Controllers
                 }
                 catch (JsonException ex)
                 {
-                    // Registrar o erro
-                    Console.WriteLine($"Erro ao desserializar o arquivo JSON: {ex.Message}");
+                    // Log the error
+                    Console.WriteLine($"Error deserializing JSON file: {ex.Message}");
                 }
                 catch (Exception ex)
                 {
-                    // Registrar outros erros
-                    Console.WriteLine($"Erro ao ler o arquivo JSON: {ex.Message}");
+                    // Log other errors
+                    Console.WriteLine($"Error reading JSON file: {ex.Message}");
                 }
             }
             return new List<Inquilino>();
@@ -44,6 +45,7 @@ namespace TP_POO_R.Controllers
         public void AdicionarInquilino(Inquilino inquilino)
         {
             var inquilinos = GetInquilinos();
+            inquilino.Id = GetProximoId(inquilinos);
             inquilinos.Add(inquilino);
             SalvarInquilinos(inquilinos);
         }
@@ -59,6 +61,27 @@ namespace TP_POO_R.Controllers
         {
             var json = JsonSerializer.Serialize(inquilinos, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_filePath, json);
+        }
+
+        private int GetProximoId(List<Inquilino> inquilinos)
+        {
+            if (inquilinos.Count == 0)
+            {
+                return 1;
+            }
+
+            var idsExistentes = inquilinos.Select(i => i.Id).ToList();
+            idsExistentes.Sort();
+
+            for (int i = 1; i <= idsExistentes.Count; i++)
+            {
+                if (!idsExistentes.Contains(i))
+                {
+                    return i;
+                }
+            }
+
+            return idsExistentes.Max() + 1;
         }
     }
 }

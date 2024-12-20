@@ -1,7 +1,6 @@
 ﻿using MaterialSkin.Controls;
 using TP_POO_R.Controllers;
 using TP_POO_R.ViewsAdicionar;
-using System;
 using System.Windows.Forms;
 
 namespace TP_POO_R.Views
@@ -26,9 +25,13 @@ namespace TP_POO_R.Views
             var inquilinos = _inquilinoController.GetInquilinos();
             dataGridView.DataSource = inquilinos;
 
-            // Configurar as colunas na ordem desejada
+            // Configurar as colunas
             dataGridView.Columns["Id"].DisplayIndex = 0;
+            dataGridView.Columns["Id"].HeaderText = "Id Inquilino";
+
             dataGridView.Columns["IdImovel"].DisplayIndex = 1;
+            dataGridView.Columns["IdImovel"].HeaderText = "Id Imóvel";
+
             dataGridView.Columns["Nome"].DisplayIndex = 2;
             dataGridView.Columns["NIF"].DisplayIndex = 3;
             dataGridView.Columns["Telefone"].DisplayIndex = 4;

@@ -3,12 +3,12 @@
     partial class AddInquilinoForm
     {
         private System.ComponentModel.IContainer components = null;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtNome;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtNIF;
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtTelefone;
         private MaterialSkin.Controls.MaterialRaisedButton btnSalvar;
         private MaterialSkin.Controls.MaterialRaisedButton btnCancelar;
-        private System.Windows.Forms.TextBox txtNome;
-        private System.Windows.Forms.TextBox txtNIF;
-        private System.Windows.Forms.TextBox txtTelefone;
-        private System.Windows.Forms.ComboBox cmbImovel; // Adicionando ComboBox para Imovel
+        private System.Windows.Forms.ComboBox cmbImovel;
 
         protected override void Dispose(bool disposing)
         {
@@ -23,86 +23,106 @@
 
         private void InitializeComponent()
         {
-            this.btnSalvar = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.btnCancelar = new MaterialSkin.Controls.MaterialRaisedButton();
-            this.txtNome = new System.Windows.Forms.TextBox();
-            this.txtNIF = new System.Windows.Forms.TextBox();
-            this.txtTelefone = new System.Windows.Forms.TextBox();
-            this.cmbImovel = new System.Windows.Forms.ComboBox();
-            this.SuspendLayout();
-            // 
-            // btnSalvar
-            // 
-            this.btnSalvar.Depth = 0;
-            this.btnSalvar.Location = new System.Drawing.Point(102, 300);
-            this.btnSalvar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Primary = true;
-            this.btnSalvar.Size = new System.Drawing.Size(100, 36);
-            this.btnSalvar.TabIndex = 0;
-            this.btnSalvar.Text = "Salvar";
-            this.btnSalvar.UseVisualStyleBackColor = true;
-            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Depth = 0;
-            this.btnCancelar.Location = new System.Drawing.Point(278, 300);
-            this.btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Primary = true;
-            this.btnCancelar.Size = new System.Drawing.Size(100, 36);
-            this.btnCancelar.TabIndex = 1;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            txtNome = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            txtNIF = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            txtTelefone = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            cmbImovel = new System.Windows.Forms.ComboBox();
+            btnSalvar = new MaterialSkin.Controls.MaterialRaisedButton();
+            btnCancelar = new MaterialSkin.Controls.MaterialRaisedButton();
+            SuspendLayout();
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(118, 123);
-            this.txtNome.Name = "txtNome";
-            this.txtNome.PlaceholderText = "Nome";
-            this.txtNome.Size = new System.Drawing.Size(250, 23);
-            this.txtNome.TabIndex = 3;
+            txtNome.Depth = 0;
+            txtNome.Hint = "Nome";
+            txtNome.Location = new Point(99, 119);
+            txtNome.MouseState = MaterialSkin.MouseState.HOVER;
+            txtNome.Name = "txtNome";
+            txtNome.PasswordChar = '\0';
+            txtNome.SelectedText = "";
+            txtNome.SelectionLength = 0;
+            txtNome.SelectionStart = 0;
+            txtNome.Size = new Size(200, 23);
+            txtNome.TabIndex = 0;
+            txtNome.UseSystemPasswordChar = false;
             // 
             // txtNIF
             // 
-            this.txtNIF.Location = new System.Drawing.Point(118, 164);
-            this.txtNIF.Name = "txtNIF";
-            this.txtNIF.PlaceholderText = "NIF";
-            this.txtNIF.Size = new System.Drawing.Size(250, 23);
-            this.txtNIF.TabIndex = 4;
+            txtNIF.Depth = 0;
+            txtNIF.Hint = "NIF";
+            txtNIF.Location = new Point(99, 148);
+            txtNIF.MouseState = MaterialSkin.MouseState.HOVER;
+            txtNIF.Name = "txtNIF";
+            txtNIF.PasswordChar = '\0';
+            txtNIF.SelectedText = "";
+            txtNIF.SelectionLength = 0;
+            txtNIF.SelectionStart = 0;
+            txtNIF.Size = new Size(200, 23);
+            txtNIF.TabIndex = 1;
+            txtNIF.UseSystemPasswordChar = false;
             // 
             // txtTelefone
             // 
-            this.txtTelefone.Location = new System.Drawing.Point(118, 202);
-            this.txtTelefone.Name = "txtTelefone";
-            this.txtTelefone.PlaceholderText = "Telefone";
-            this.txtTelefone.Size = new System.Drawing.Size(250, 23);
-            this.txtTelefone.TabIndex = 5;
+            txtTelefone.Depth = 0;
+            txtTelefone.Hint = "Telefone";
+            txtTelefone.Location = new Point(99, 177);
+            txtTelefone.MouseState = MaterialSkin.MouseState.HOVER;
+            txtTelefone.Name = "txtTelefone";
+            txtTelefone.PasswordChar = '\0';
+            txtTelefone.SelectedText = "";
+            txtTelefone.SelectionLength = 0;
+            txtTelefone.SelectionStart = 0;
+            txtTelefone.Size = new Size(200, 23);
+            txtTelefone.TabIndex = 2;
+            txtTelefone.UseSystemPasswordChar = false;
             // 
             // cmbImovel
             // 
-            this.cmbImovel.Location = new System.Drawing.Point(118, 81);
-            this.cmbImovel.Name = "cmbImovel";
-            this.cmbImovel.Size = new System.Drawing.Size(250, 23);
-            this.cmbImovel.TabIndex = 0;
+            cmbImovel.Location = new Point(99, 81);
+            cmbImovel.Name = "cmbImovel";
+            cmbImovel.Size = new Size(200, 23);
+            cmbImovel.TabIndex = 3;
+            // 
+            // btnSalvar
+            // 
+            btnSalvar.Depth = 0;
+            btnSalvar.Location = new Point(90, 220);
+            btnSalvar.MouseState = MaterialSkin.MouseState.HOVER;
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Primary = true;
+            btnSalvar.Size = new Size(75, 23);
+            btnSalvar.TabIndex = 4;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
+            // 
+            // btnCancelar
+            // 
+            btnCancelar.Depth = 0;
+            btnCancelar.Location = new Point(212, 220);
+            btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Primary = true;
+            btnCancelar.Size = new Size(75, 23);
+            btnCancelar.TabIndex = 5;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // AddInquilinoForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(516, 404);
-            this.Controls.Add(this.cmbImovel);
-            this.Controls.Add(this.txtTelefone);
-            this.Controls.Add(this.txtNIF);
-            this.Controls.Add(this.txtNome);
-            this.Controls.Add(this.btnCancelar);
-            this.Controls.Add(this.btnSalvar);
-            this.Name = "AddInquilinoForm";
-            this.Text = "Adicionar Inquilino";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(400, 316);
+            Controls.Add(btnCancelar);
+            Controls.Add(btnSalvar);
+            Controls.Add(cmbImovel);
+            Controls.Add(txtTelefone);
+            Controls.Add(txtNIF);
+            Controls.Add(txtNome);
+            Name = "AddInquilinoForm";
+            Text = "Adicionar Inquilino";
+            ResumeLayout(false);
         }
 
         #endregion
