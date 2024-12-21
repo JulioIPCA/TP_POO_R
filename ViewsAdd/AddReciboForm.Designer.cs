@@ -3,12 +3,10 @@
     partial class AddReciboForm
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.TextBox txtIdRecibo;
-        private System.Windows.Forms.TextBox txtDescricao;
-        private System.Windows.Forms.TextBox txtImovelId;
-        private System.Windows.Forms.TextBox txtInquilinoId;
-        private System.Windows.Forms.TextBox txtValor;
-        private System.Windows.Forms.DateTimePicker dtpData; // Adicionar DateTimePicker
+        private MaterialSkin.Controls.MaterialSingleLineTextField txtDescricao;
+        private System.Windows.Forms.DateTimePicker dateTimePickerData;
+        private System.Windows.Forms.ComboBox comboBoxContratos;
+        private MaterialSkin.Controls.MaterialRaisedButton btnSalvar;
 
         protected override void Dispose(bool disposing)
         {
@@ -19,70 +17,79 @@
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
+
         private void InitializeComponent()
         {
-            this.txtIdRecibo = new System.Windows.Forms.TextBox();
-            this.txtDescricao = new System.Windows.Forms.TextBox();
-            this.txtImovelId = new System.Windows.Forms.TextBox();
-            this.txtInquilinoId = new System.Windows.Forms.TextBox();
-            this.txtValor = new System.Windows.Forms.TextBox();
-            this.dtpData = new System.Windows.Forms.DateTimePicker(); // Inicializar DateTimePicker
-            this.SuspendLayout();
+            comboBoxContratos = new ComboBox();
+            txtDescricao = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            dateTimePickerData = new DateTimePicker();
+            btnSalvar = new MaterialSkin.Controls.MaterialRaisedButton();
+            SuspendLayout();
             // 
-            // txtIdRecibo
+            // comboBoxContratos
             // 
-            this.txtIdRecibo.Location = new System.Drawing.Point(12, 12);
-            this.txtIdRecibo.Name = "txtIdRecibo";
-            this.txtIdRecibo.Size = new System.Drawing.Size(200, 20);
-            this.txtIdRecibo.TabIndex = 0;
+            comboBoxContratos.FormattingEnabled = true;
+            comboBoxContratos.Location = new Point(53, 89);
+            comboBoxContratos.Margin = new Padding(4, 3, 4, 3);
+            comboBoxContratos.Name = "comboBoxContratos";
+            comboBoxContratos.Size = new Size(303, 23);
+            comboBoxContratos.Text = "Inquilino";
+            comboBoxContratos.TabIndex = 0;
             // 
             // txtDescricao
             // 
-            this.txtDescricao.Location = new System.Drawing.Point(12, 38);
-            this.txtDescricao.Name = "txtDescricao";
-            this.txtDescricao.Size = new System.Drawing.Size(200, 20);
-            this.txtDescricao.TabIndex = 1;
+            txtDescricao.Depth = 0;
+            txtDescricao.Hint = "Descrição";
+            txtDescricao.Location = new Point(53, 118);
+            txtDescricao.Margin = new Padding(4, 3, 4, 3);
+            txtDescricao.MouseState = MaterialSkin.MouseState.HOVER;
+            txtDescricao.Name = "txtDescricao";
+            txtDescricao.PasswordChar = '\0';
+            txtDescricao.SelectedText = "";
+            txtDescricao.SelectionLength = 0;
+            txtDescricao.SelectionStart = 0;
+            txtDescricao.Size = new Size(303, 23);
+            txtDescricao.TabIndex = 1;
+            txtDescricao.UseSystemPasswordChar = false;
             // 
-            // txtImovelId
+            // dateTimePickerData
             // 
-            this.txtImovelId.Location = new System.Drawing.Point(12, 64);
-            this.txtImovelId.Name = "txtImovelId";
-            this.txtImovelId.Size = new System.Drawing.Size(200, 20);
-            this.txtImovelId.TabIndex = 2;
+            dateTimePickerData.Location = new Point(53, 147);
+            dateTimePickerData.Margin = new Padding(4, 3, 4, 3);
+            dateTimePickerData.Name = "dateTimePickerData";
+            dateTimePickerData.Size = new Size(303, 23);
+            dateTimePickerData.TabIndex = 2;
             // 
-            // txtInquilinoId
+            // btnSalvar
             // 
-            this.txtInquilinoId.Location = new System.Drawing.Point(12, 90);
-            this.txtInquilinoId.Name = "txtInquilinoId";
-            this.txtInquilinoId.Size = new System.Drawing.Size(200, 20);
-            this.txtInquilinoId.TabIndex = 3;
-            // 
-            // txtValor
-            // 
-            this.txtValor.Location = new System.Drawing.Point(12, 116);
-            this.txtValor.Name = "txtValor";
-            this.txtValor.Size = new System.Drawing.Size(200, 20);
-            this.txtValor.TabIndex = 4;
-            // 
-            // dtpData
-            // 
-            this.dtpData.Location = new System.Drawing.Point(12, 142);
-            this.dtpData.Name = "dtpData";
-            this.dtpData.Size = new System.Drawing.Size(200, 20);
-            this.dtpData.TabIndex = 5;
+            btnSalvar.Depth = 0;
+            btnSalvar.Location = new Point(268, 186);
+            btnSalvar.Margin = new Padding(4, 3, 4, 3);
+            btnSalvar.MouseState = MaterialSkin.MouseState.HOVER;
+            btnSalvar.Name = "btnSalvar";
+            btnSalvar.Primary = true;
+            btnSalvar.Size = new Size(88, 27);
+            btnSalvar.TabIndex = 3;
+            btnSalvar.Text = "Salvar";
+            btnSalvar.UseVisualStyleBackColor = true;
+            btnSalvar.Click += btnSalvar_Click;
             // 
             // AddReciboForm
             // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.dtpData);
-            this.Controls.Add(this.txtValor);
-            this.Controls.Add(this.txtInquilinoId);
-            this.Controls.Add(this.txtImovelId);
-            this.Controls.Add(this.txtDescricao);
-            this.Controls.Add(this.txtIdRecibo);
-            this.Name = "AddReciboForm";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(406, 246);
+            Controls.Add(btnSalvar);
+            Controls.Add(dateTimePickerData);
+            Controls.Add(txtDescricao);
+            Controls.Add(comboBoxContratos);
+            Margin = new Padding(4, 3, 4, 3);
+            Name = "AddReciboForm";
+            Text = "Adicionar Recibo";
+            Load += AddReciboForm_Load;
+            ResumeLayout(false);
         }
+        #endregion
     }
 }

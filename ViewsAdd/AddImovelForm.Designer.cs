@@ -25,6 +25,7 @@ namespace TP_POO_R.ViewsAdicionar
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
         private void InitializeComponent()
         {
             txtTipo = new MaterialSingleLineTextField();
@@ -119,5 +120,6 @@ namespace TP_POO_R.ViewsAdicionar
             Text = "Adicionar Imóvel";
             ResumeLayout(false);
         }
+      #endregion
     }
 }

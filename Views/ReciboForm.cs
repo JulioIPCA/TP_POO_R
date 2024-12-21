@@ -1,101 +1,71 @@
-﻿
-using MaterialSkin.Controls;
+﻿using MaterialSkin.Controls;
 using TP_POO_R.Controllers;
-using TP_POO_R.Models;
 using TP_POO_R.ViewsAdicionar;
+using TP_POO_R.Models;
+using System;
+using System.Windows.Forms;
 
 namespace TP_POO_R.Views
 {
     public partial class ReciboForm : MaterialForm
     {
+        // Controlador de recibos
         private readonly ReciboController _reciboController;
 
         public ReciboForm()
         {
             InitializeComponent();
-            _reciboController = new ReciboController();
+            // Inicializa o controlador de recibos com o DataGridView
+            _reciboController = new ReciboController(dataGridView);
         }
 
+        // Evento disparado ao carregar o formulário
         private void ReciboForm_Load(object sender, EventArgs e)
         {
-            // Configurar colunas da DataGridView
-            ConfigureDataGridView();
-
-            // Carregar dados na DataGridView
             LoadData();
         }
 
-        private void ConfigureDataGridView()
-        {
-            dataGridView.AutoGenerateColumns = false;
-
-            // Adicionar colunas ao DataGridView
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "IdRecibo", HeaderText = "ID Recibo" });
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Descricao", HeaderText = "Descrição" });
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "ImovelId", HeaderText = "Imóvel ID" });
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "InquilinoId", HeaderText = "Inquilino ID" });
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Valor", HeaderText = "Valor" });
-            dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "Data", HeaderText = "Data" });
-        }
-
+        // Carrega os dados dos recibos no DataGridView
         private void LoadData()
         {
-            try
-            {
-                var recibos = _reciboController.GetRecibos();
-                dataGridView.DataSource = recibos;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Erro ao carregar dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                dataGridView.DataSource = new List<Recibo>();
-            }
+            var recibos = _reciboController.GetRecibos();
+            dataGridView.DataSource = null; // Limpa os dados existentes
+            dataGridView.DataSource = recibos;
+
+            // Configura as colunas do DataGridView
+            dataGridView.Columns["IdRecibo"].DisplayIndex = 0;
+            dataGridView.Columns["IdRecibo"].HeaderText = "Id Recibo";
+
+            dataGridView.Columns["IdContrato"].DisplayIndex = 1;
+            dataGridView.Columns["IdContrato"].HeaderText = "Id Contrato";
+
+            dataGridView.Columns["Data"].DisplayIndex = 2;
+            dataGridView.Columns["Valor"].DisplayIndex = 3; // Adiciona a coluna Valor
         }
 
+        // Evento disparado ao clicar no botão de adicionar recibo
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            AddReciboForm addReciboForm = new AddReciboForm();
-            if (addReciboForm.ShowDialog() == DialogResult.OK)
+            using (var addReciboForm = new AddReciboForm(dataGridView))
             {
-                // Adicionar o novo recibo
-                var novoRecibo = addReciboForm.NovoRecibo;
-
-                if (novoRecibo != null)
+                if (addReciboForm.ShowDialog() == DialogResult.OK)
                 {
-                    _reciboController.AdicionarRecibo(novoRecibo);
-
-                    // Recarregar dados após adicionar um novo recibo
                     LoadData();
-                }
-                else
-                {
-                    MessageBox.Show("Erro ao obter o novo recibo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
+        // Evento disparado ao clicar no botão de remover recibo
         private void btnRemover_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count > 0)
             {
-                // Obter o índice da linha selecionada
-                var selectedIndex = dataGridView.SelectedRows[0].Index;
+                var selectedRow = dataGridView.SelectedRows[0];
+                var recibo = (Recibo)selectedRow.DataBoundItem;
 
-                // Obter o recibo selecionado
-                var reciboToRemove = dataGridView.SelectedRows[0].DataBoundItem as Recibo;
-
-                if (reciboToRemove != null)
-                {
-                    // Remover o recibo selecionado
-                    _reciboController.RemoverRecibo(reciboToRemove.IdRecibo);
-
-                    // Recarregar dados após remover o recibo
-                    LoadData();
-                }
-                else
-                {
-                    MessageBox.Show("Erro ao obter o recibo selecionado.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                // Remove o recibo selecionado
+                _reciboController.RemoverRecibo(recibo.IdRecibo);
+                LoadData();
             }
             else
             {

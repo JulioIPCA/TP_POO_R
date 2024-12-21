@@ -1,24 +1,25 @@
 ﻿using MaterialSkin.Controls;
-using TP_POO_R.Models;
 using TP_POO_R.Controllers;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace TP_POO_R.ViewsAdicionar
 {
     public partial class AddContratoForm : MaterialForm
     {
-        public Contrato? NovoContrato { get; private set; } // Tornar anulável
+        // Propriedade para armazenar o novo contrato, pode ser nula
+        public Contrato? NovoContrato { get; private set; }
         private readonly InquilinoController _inquilinoController;
+        private readonly ContratoController _contratoController;
 
-        // Construtor que aceita um InquilinoController como argumento
-        public AddContratoForm(InquilinoController inquilinoController)
+        // Construtor que aceita um InquilinoController e um ContratoController como argumentos
+        public AddContratoForm(InquilinoController inquilinoController, ContratoController contratoController)
         {
             InitializeComponent();
             _inquilinoController = inquilinoController;
-            LoadInquilinos();
+            _contratoController = contratoController;
+            LoadInquilinos(); // Carrega a lista de inquilinos
         }
 
+        // Carrega a lista de inquilinos no ComboBox
         private void LoadInquilinos()
         {
             var inquilinos = _inquilinoController.GetInquilinos()
@@ -35,6 +36,7 @@ namespace TP_POO_R.ViewsAdicionar
             cmbInquilinos.ValueMember = "Id";
         }
 
+        // Evento disparado ao clicar no botão de salvar
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
@@ -45,18 +47,33 @@ namespace TP_POO_R.ViewsAdicionar
                     return;
                 }
 
-                // Criar uma nova instância de Contrato com os dados do formulário
+                var idInquilino = cmbInquilinos.SelectedValue?.ToString() ?? string.Empty;
+
+                // Verifica se o inquilino já possui um contrato
+                if (_contratoController.InquilinoJaPossuiContrato(idInquilino, _contratoController.GetContratos()))
+                {
+                    MessageBox.Show("O inquilino selecionado já possui um contrato.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Cria uma nova instância de Contrato com os dados do formulário
                 NovoContrato = new Contrato
                 {
-                    IdInquilino = cmbInquilinos.SelectedValue.ToString(),
+                    IdInquilino = idInquilino,
                     Data = dtpDataInicio.Value,
                     DataCessacao = dtpDataFim.Value,
-                    Nome = txtNome.Text,
                     Valor = txtValor.Text
                 };
 
+                // Valida o contrato
+                if (!NovoContrato.Validar())
+                {
+                    MessageBox.Show("Dados do contrato inválidos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 this.DialogResult = DialogResult.OK;
-                this.Close();
+                this.Close(); // Fecha o formulário
             }
             catch (FormatException)
             {
@@ -64,10 +81,12 @@ namespace TP_POO_R.ViewsAdicionar
             }
         }
 
+        // Evento disparado ao clicar no botão de cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            this.Close(); // Fecha o formulário
         }
     }
 }
+

@@ -6,6 +6,7 @@ namespace TP_POO_R.Views
 {
     public partial class RegisterForm : Form
     {
+        // Controlador de senhorio
         private SenhorioController senhorioController = new SenhorioController();
 
         public RegisterForm()
@@ -13,10 +14,12 @@ namespace TP_POO_R.Views
             InitializeComponent();
         }
 
+        // Evento disparado ao clicar no botão de registro
         private void btnRegister_Click(object sender, EventArgs e)
         {
             try
             {
+                // Cria um novo objeto Senhorio com os dados do formulário
                 Senhorio novoSenhorio = new Senhorio
                 {
                     Nome = txtNome.Text,
@@ -25,14 +28,17 @@ namespace TP_POO_R.Views
                     Password = txtPassword.Text
                 };
 
+                // Adiciona o novo senhorio usando o controlador
                 senhorioController.AdicionarSenhorio(novoSenhorio);
                 MessageBox.Show("Senhorio registrado com sucesso!");
-                this.Close();
+                this.Close(); // Fecha o formulário de registro
             }
             catch (ArgumentException ex)
             {
+                // Exibe uma mensagem de erro se houver uma exceção de validação
                 MessageBox.Show(ex.Message, "Erro de Validação", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
 }
+

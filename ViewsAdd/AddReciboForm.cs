@@ -1,54 +1,71 @@
-﻿
+﻿using MaterialSkin.Controls;
 using TP_POO_R.Controllers;
 using TP_POO_R.Models;
+using System;
+using System.Windows.Forms;
 
 namespace TP_POO_R.ViewsAdicionar
 {
-    public partial class AddReciboForm : Form
+    public partial class AddReciboForm : MaterialForm
     {
-        public Recibo? NovoRecibo { get; private set; }
         private readonly ReciboController _reciboController;
+        private readonly ContratoController _contratoController;
 
-        public AddReciboForm()
+        // Construtor que aceita um DataGridView como argumento
+        public AddReciboForm(DataGridView dataGridView)
         {
             InitializeComponent();
-            NovoRecibo = null;
-            _reciboController = new ReciboController();
+            _reciboController = new ReciboController(dataGridView);
+            _contratoController = new ContratoController(dataGridView);
         }
 
+        // Evento disparado ao carregar o formulário
+        private void AddReciboForm_Load(object sender, EventArgs e)
+        {
+            CarregarContratos(); // Carrega a lista de contratos
+        }
+
+        // Carrega a lista de contratos no ComboBox
+        private void CarregarContratos()
+        {
+            var contratos = _contratoController.GetContratos();
+            comboBoxContratos.DataSource = contratos;
+            comboBoxContratos.DisplayMember = "Descricao"; // Supondo que Contrato tem uma propriedade Descricao
+            comboBoxContratos.ValueMember = "IdContrato";
+        }
+
+        // Evento disparado ao clicar no botão de salvar
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
             {
-                // Coletar dados do formulário
-                int idRecibo = int.Parse(txtIdRecibo.Text);
-                string descricao = txtDescricao.Text;
-                int imovelId = int.Parse(txtImovelId.Text);
-                int inquilinoId = int.Parse(txtInquilinoId.Text);
-                decimal valor = decimal.Parse(txtValor.Text);
-                DateTime data = dtpData.Value; // Usar o valor do DateTimePicker
+                // Cria um objeto recibo com os dados do formulário
+                var recibo = new Recibo
+                {
+                    Data = dateTimePickerData.Value,
+                    IdContrato = comboBoxContratos.SelectedValue != null ? (int)comboBoxContratos.SelectedValue : 0,
+                    Valor = 0 // Supondo que Valor será definido no método AdicionarRecibo
+                };
 
-                // Criar e validar o recibo usando o controller
-                NovoRecibo = _reciboController.CriarRecibo(idRecibo, descricao, imovelId, inquilinoId, valor, data);
+                // Adiciona o novo recibo
+                _reciboController.AdicionarRecibo(recibo);
 
-                MessageBox.Show("Recibo salvo com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
-                this.Close();
-            }
-            catch (FormatException ex)
-            {
-                MessageBox.Show($"Erro de formatação: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close(); // Fecha o formulário
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Erro ao salvar o recibo: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Erro ao salvar os dados: {ex.Message}", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        // Evento disparado ao clicar no botão de cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            this.Close(); // Fecha o formulário
         }
     }
 }
+
+

@@ -20,6 +20,7 @@ namespace TP_POO_R.Views
             _inquilinoController = new InquilinoController();
         }
 
+        // Evento disparado quando o formulário é carregado
         private void DespesaForm_Load(object sender, EventArgs e)
         {
             // Configurar colunas da DataGridView
@@ -29,6 +30,7 @@ namespace TP_POO_R.Views
             LoadData();
         }
 
+        // Configura as colunas da DataGridView
         private void ConfigureDataGridView()
         {
             dataGridView.AutoGenerateColumns = false;
@@ -44,6 +46,7 @@ namespace TP_POO_R.Views
             dataGridView.Columns.Add(new DataGridViewTextBoxColumn { DataPropertyName = "ValorTotal", HeaderText = "Valor Total" });
         }
 
+        // Carrega os dados na DataGridView
         private void LoadData()
         {
             var despesas = _controller.LoadDespesas();
@@ -66,9 +69,10 @@ namespace TP_POO_R.Views
             dataGridView.DataSource = despesasComInquilinos.ToList();
         }
 
+        // Evento disparado ao clicar no botão de adicionar despesa
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            using (var addDespesaForm = new AddDespesa())
+            using (var addDespesaForm = new AddDespesaForm(_inquilinoController))
             {
                 if (addDespesaForm.ShowDialog() == DialogResult.OK)
                 {
@@ -84,6 +88,7 @@ namespace TP_POO_R.Views
             }
         }
 
+        // Evento disparado ao clicar no botão de remover despesa
         private void btnRemover_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count > 0)
@@ -104,3 +109,4 @@ namespace TP_POO_R.Views
         }
     }
 }
+

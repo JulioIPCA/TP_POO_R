@@ -15,7 +15,7 @@
             }
             base.Dispose(disposing);
         }
-
+        #region Windows Form Designer generated code
         private void InitializeComponent()
         {
             btnAdicionar = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -71,5 +71,6 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
+        #endregion
     }
 }

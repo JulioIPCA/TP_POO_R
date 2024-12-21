@@ -2,11 +2,11 @@
 {
     partial class ImovelForm
     {
-        private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.DataGridView dataGridView;
         private MaterialSkin.Controls.MaterialRaisedButton btnAdicionar;
         private MaterialSkin.Controls.MaterialRaisedButton btnRemover;
 
+        #region Windows Form Designer generated code
         private void InitializeComponent()
         {
             dataGridView = new DataGridView();
@@ -60,5 +60,6 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
+        #endregion
     }
 }

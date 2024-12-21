@@ -6,7 +6,6 @@
         private ComboBox cmbInquilinos;
         private DateTimePicker dtpDataInicio;
         private DateTimePicker dtpDataFim;
-        private MaterialSkin.Controls.MaterialSingleLineTextField txtNome;
         private MaterialSkin.Controls.MaterialSingleLineTextField txtValor;
         private MaterialSkin.Controls.MaterialRaisedButton btnSalvar;
         private MaterialSkin.Controls.MaterialRaisedButton btnCancelar;
@@ -28,7 +27,6 @@
             this.cmbInquilinos = new System.Windows.Forms.ComboBox();
             this.dtpDataInicio = new System.Windows.Forms.DateTimePicker();
             this.dtpDataFim = new System.Windows.Forms.DateTimePicker();
-            this.txtNome = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.txtValor = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.btnSalvar = new MaterialSkin.Controls.MaterialRaisedButton();
             this.btnCancelar = new MaterialSkin.Controls.MaterialRaisedButton();
@@ -60,26 +58,11 @@
             this.dtpDataFim.Size = new System.Drawing.Size(200, 23);
             this.dtpDataFim.TabIndex = 2;
             // 
-            // txtNome
-            // 
-            this.txtNome.Depth = 0;
-            this.txtNome.Hint = "Nome";
-            this.txtNome.Location = new System.Drawing.Point(99, 264);
-            this.txtNome.MouseState = MaterialSkin.MouseState.HOVER;
-            this.txtNome.Name = "txtNome";
-            this.txtNome.PasswordChar = '\0';
-            this.txtNome.SelectedText = "";
-            this.txtNome.SelectionLength = 0;
-            this.txtNome.SelectionStart = 0;
-            this.txtNome.Size = new System.Drawing.Size(200, 23);
-            this.txtNome.TabIndex = 3;
-            this.txtNome.UseSystemPasswordChar = false;
-            // 
             // txtValor
             // 
             this.txtValor.Depth = 0;
             this.txtValor.Hint = "Valor";
-            this.txtValor.Location = new System.Drawing.Point(99, 293);
+            this.txtValor.Location = new System.Drawing.Point(99, 264);
             this.txtValor.MouseState = MaterialSkin.MouseState.HOVER;
             this.txtValor.Name = "txtValor";
             this.txtValor.PasswordChar = '\0';
@@ -87,7 +70,7 @@
             this.txtValor.SelectionLength = 0;
             this.txtValor.SelectionStart = 0;
             this.txtValor.Size = new System.Drawing.Size(200, 23);
-            this.txtValor.TabIndex = 4;
+            this.txtValor.TabIndex = 3;
             this.txtValor.UseSystemPasswordChar = false;
             // 
             // btnSalvar
@@ -98,7 +81,7 @@
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Primary = true;
             this.btnSalvar.Size = new System.Drawing.Size(75, 23);
-            this.btnSalvar.TabIndex = 5;
+            this.btnSalvar.TabIndex = 4;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -111,7 +94,7 @@
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Primary = true;
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.TabIndex = 5;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
@@ -126,7 +109,7 @@
             this.lblInquilino.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblInquilino.Name = "lblInquilino";
             this.lblInquilino.Size = new System.Drawing.Size(68, 19);
-            this.lblInquilino.TabIndex = 7;
+            this.lblInquilino.TabIndex = 6;
             this.lblInquilino.Text = "Inquilino";
             // 
             // lblDataInicio
@@ -139,7 +122,7 @@
             this.lblDataInicio.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblDataInicio.Name = "lblDataInicio";
             this.lblDataInicio.Size = new System.Drawing.Size(79, 19);
-            this.lblDataInicio.TabIndex = 8;
+            this.lblDataInicio.TabIndex = 7;
             this.lblDataInicio.Text = "Data Início";
             // 
             // lblDataFim
@@ -152,7 +135,7 @@
             this.lblDataFim.MouseState = MaterialSkin.MouseState.HOVER;
             this.lblDataFim.Name = "lblDataFim";
             this.lblDataFim.Size = new System.Drawing.Size(68, 19);
-            this.lblDataFim.TabIndex = 9;
+            this.lblDataFim.TabIndex = 8;
             this.lblDataFim.Text = "Data Fim";
             // 
             // AddContratoForm
@@ -166,7 +149,6 @@
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnSalvar);
             this.Controls.Add(this.txtValor);
-            this.Controls.Add(this.txtNome);
             this.Controls.Add(this.dtpDataFim);
             this.Controls.Add(this.dtpDataInicio);
             this.Controls.Add(this.cmbInquilinos);

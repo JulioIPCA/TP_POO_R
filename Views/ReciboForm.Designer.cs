@@ -15,6 +15,7 @@
             }
             base.Dispose(disposing);
         }
+        #region Windows Form Designer generated code
 
         private void InitializeComponent()
         {
@@ -71,5 +72,6 @@
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }
+        #endregion
     }
 }

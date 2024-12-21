@@ -17,18 +17,28 @@ namespace TP_POO_R.Views
             _inquilinoController = new InquilinoController();
         }
 
+        // Evento disparado quando o formulário é carregado
         private void ContratoForm_Load(object sender, EventArgs e)
         {
             _controller.LoadData();
         }
 
+        // Evento disparado ao clicar no botão de adicionar contrato
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            var addContratoForm = new AddContratoForm(_inquilinoController);
-            addContratoForm.FormClosed += (s, args) => _controller.LoadData(); // Refresh the data after the form is closed
-            addContratoForm.ShowDialog();
+            using (var addContratoForm = new AddContratoForm(_inquilinoController, _controller))
+            {
+                if (addContratoForm.ShowDialog() == DialogResult.OK)
+                {
+                    if (addContratoForm.NovoContrato != null)
+                    {
+                        _controller.AddContrato(addContratoForm.NovoContrato);
+                    }
+                }
+            }
         }
 
+        // Evento disparado ao clicar no botão de remover contrato
         private void btnRemover_Click(object sender, EventArgs e)
         {
             _controller.RemoveSelectedContrato();

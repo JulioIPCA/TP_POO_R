@@ -1,34 +1,30 @@
 ﻿using MaterialSkin.Controls;
 using System;
 using System.Windows.Forms;
-using TP_POO_R.Models; // Atualize o namespace para o correto
+using TP_POO_R.Models;
 
 namespace TP_POO_R.ViewsAdicionar
 {
     public partial class AddImovelForm : MaterialForm
     {
+        // Propriedade para armazenar o novo imóvel, pode ser nula
         public Imovel? NovoImovel { get; private set; }
-        private static int _nextIdImovel = 1; // Variável estática para gerar IDs sequenciais
 
         public AddImovelForm()
         {
             InitializeComponent();
         }
 
+        // Evento disparado ao clicar no botão de salvar
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             if (ValidarCampos())
             {
-                NovoImovel = new Imovel
-                {
-                    IdImovel = GerarNovoIdImovel(), // Método para gerar um novo IdImovel
-                    Tipo = txtTipo.Text,
-                    Endereco = txtEndereco.Text,
-                    NQuartos = decimal.Parse(txtNQuartos.Text)
-                };
+                // Cria uma nova instância de Imovel com os dados do formulário
+                NovoImovel = new Imovel(txtTipo.Text, txtEndereco.Text, decimal.Parse(txtNQuartos.Text));
 
                 DialogResult = DialogResult.OK;
-                Close();
+                Close(); // Fecha o formulário
             }
             else
             {
@@ -36,22 +32,20 @@ namespace TP_POO_R.ViewsAdicionar
             }
         }
 
+        // Evento disparado ao clicar no botão de cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
-            Close();
+            Close(); // Fecha o formulário
         }
 
+        // Valida os campos do formulário
         private bool ValidarCampos()
         {
             return !string.IsNullOrWhiteSpace(txtTipo.Text) &&
                    !string.IsNullOrWhiteSpace(txtEndereco.Text) &&
                    decimal.TryParse(txtNQuartos.Text, out _);
         }
-
-        private int GerarNovoIdImovel()
-        {
-            return _nextIdImovel++; // Incrementa o ID para o próximo imóvel
-        }
     }
 }
+

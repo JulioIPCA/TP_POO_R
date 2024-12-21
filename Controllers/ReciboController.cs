@@ -1,57 +1,96 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text.Json;
+using System.Windows.Forms;
 using TP_POO_R.Models;
 
-namespace TP_POO_R.Controllers
+public class ReciboController
 {
-    public class ReciboController
+    private readonly string _filePath; // Caminho do arquivo JSON
+    private readonly ContratoController _contratoController;
+
+    public ReciboController(DataGridView dataGridView)
     {
-        private List<Recibo> _recibos;
+        _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "recibos.json");
+        _contratoController = new ContratoController(dataGridView);
+    }
 
-        public ReciboController()
+    // Obtém a lista de recibos do arquivo JSON
+    public List<Recibo> GetRecibos()
+    {
+        if (File.Exists(_filePath))
         {
-            _recibos = new List<Recibo>();
-        }
-
-        public Recibo CriarRecibo(int idRecibo, string descricao, int imovelId, int inquilinoId, decimal valor, DateTime data)
-        {
-            // Validação básica
-            if (string.IsNullOrWhiteSpace(descricao) || imovelId <= 0 || inquilinoId <= 0 || valor <= 0 || data == default)
+            var json = File.ReadAllText(_filePath);
+            if (!string.IsNullOrWhiteSpace(json))
             {
-                throw new ArgumentException("Todos os campos devem ser preenchidos corretamente.");
-            }
-
-            // Criar um novo recibo
-            var recibo = new Recibo
-            {
-                IdRecibo = idRecibo,
-                Descricao = descricao,
-                ImovelId = imovelId,
-                InquilinoId = inquilinoId,
-                Valor = valor,
-                Data = data
-            };
-
-            _recibos.Add(recibo);
-            return recibo;
-        }
-
-        public List<Recibo> GetRecibos()
-        {
-            return _recibos;
-        }
-
-        public void AdicionarRecibo(Recibo recibo)
-        {
-            _recibos.Add(recibo);
-        }
-
-        public void RemoverRecibo(int idRecibo)
-        {
-            var recibo = _recibos.Find(r => r.IdRecibo == idRecibo);
-            if (recibo != null)
-            {
-                _recibos.Remove(recibo);
+                return JsonSerializer.Deserialize<List<Recibo>>(json) ?? new List<Recibo>();
             }
         }
+        return new List<Recibo>();
+    }
+
+    // Adiciona um novo recibo
+    public void AdicionarRecibo(Recibo recibo)
+    {
+        var recibos = GetRecibos();
+
+        // Encontra o contrato associado ao recibo
+        var contrato = _contratoController.GetContratos().FirstOrDefault(c => c.IdContrato == recibo.IdContrato);
+        if (contrato != null)
+        {
+            // Converte o valor do contrato para decimal e atribui ao recibo
+            if (decimal.TryParse(contrato.Valor, out decimal valorContrato))
+            {
+                recibo.Valor = valorContrato;
+            }
+            else
+            {
+                MessageBox.Show("O valor do contrato é inválido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        recibo.IdRecibo = GetProximoId(recibos);
+        recibos.Add(recibo);
+        SalvarRecibos(recibos);
+    }
+
+    // Remove um recibo pelo ID
+    public void RemoverRecibo(int id)
+    {
+        var recibos = GetRecibos();
+        recibos.RemoveAll(r => r.IdRecibo == id);
+        SalvarRecibos(recibos);
+    }
+
+    // Salva a lista de recibos no arquivo JSON
+    private void SalvarRecibos(List<Recibo> recibos)
+    {
+        var json = JsonSerializer.Serialize(recibos, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(_filePath, json);
+    }
+
+    // Obtém o próximo ID disponível para um novo recibo
+    private int GetProximoId(List<Recibo> recibos)
+    {
+        if (recibos.Count == 0)
+        {
+            return 1;
+        }
+
+        var idsExistentes = recibos.Select(r => r.IdRecibo).ToList();
+        idsExistentes.Sort();
+
+        for (int i = 1; i <= idsExistentes.Count; i++)
+        {
+            if (!idsExistentes.Contains(i))
+            {
+                return i;
+            }
+        }
+
+        return idsExistentes.Max() + 1;
     }
 }

@@ -9,13 +9,14 @@ namespace TP_POO_R.Controllers
 {
     public class InquilinoController
     {
-        private readonly string _filePath;
+        private readonly string _filePath; // Caminho do arquivo JSON
 
         public InquilinoController()
         {
             _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "inquilinos.json");
         }
 
+        // Obtém a lista de inquilinos do arquivo JSON
         public List<Inquilino> GetInquilinos()
         {
             if (File.Exists(_filePath))
@@ -42,6 +43,7 @@ namespace TP_POO_R.Controllers
             return new List<Inquilino>();
         }
 
+        // Adiciona um novo inquilino
         public void AdicionarInquilino(Inquilino inquilino)
         {
             var inquilinos = GetInquilinos();
@@ -50,6 +52,7 @@ namespace TP_POO_R.Controllers
             SalvarInquilinos(inquilinos);
         }
 
+        // Remove um inquilino pelo ID
         public void RemoverInquilino(int id)
         {
             var inquilinos = GetInquilinos();
@@ -57,12 +60,14 @@ namespace TP_POO_R.Controllers
             SalvarInquilinos(inquilinos);
         }
 
+        // Salva a lista de inquilinos no arquivo JSON
         private void SalvarInquilinos(List<Inquilino> inquilinos)
         {
             var json = JsonSerializer.Serialize(inquilinos, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_filePath, json);
         }
 
+        // Obtém o próximo ID disponível para um novo inquilino
         private int GetProximoId(List<Inquilino> inquilinos)
         {
             if (inquilinos.Count == 0)

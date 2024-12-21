@@ -82,6 +82,7 @@
             cmbImovel.Name = "cmbImovel";
             cmbImovel.Size = new Size(200, 23);
             cmbImovel.TabIndex = 3;
+            cmbImovel.Text = "IdImovel";
             // 
             // btnSalvar
             // 

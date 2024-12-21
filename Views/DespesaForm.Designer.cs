@@ -37,7 +37,7 @@
             btnAdicionar.TabIndex = 0;
             btnAdicionar.Text = "Adicionar";
             btnAdicionar.UseVisualStyleBackColor = true;
-            btnAdicionar.Click += btnAdicionar_Click;
+            btnAdicionar.Click += new System.EventHandler(this.btnAdicionar_Click);
             // 
             // btnRemover
             // 
@@ -50,7 +50,7 @@
             btnRemover.TabIndex = 1;
             btnRemover.Text = "Remover";
             btnRemover.UseVisualStyleBackColor = true;
-            btnRemover.Click += btnRemover_Click;
+            btnRemover.Click += new System.EventHandler(this.btnRemover_Click);
             // 
             // dataGridView
             // 
@@ -70,7 +70,7 @@
             Controls.Add(btnAdicionar);
             Name = "DespesaForm";
             Text = "Gerenciar Despesas";
-            Load += DespesaForm_Load;
+            Load += new System.EventHandler(this.DespesaForm_Load);
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             ResumeLayout(false);
         }

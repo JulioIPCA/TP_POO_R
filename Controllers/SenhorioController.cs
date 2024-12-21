@@ -17,6 +17,7 @@ namespace TP_POO_R.Models
             CarregarSenhorios();
         }
 
+        // Adiciona um novo senhorio
         public bool AdicionarSenhorio(Senhorio senhorio)
         {
             senhorio.Id = senhorios.Count > 0 ? senhorios[^1].Id + 1 : 1;
@@ -26,6 +27,7 @@ namespace TP_POO_R.Models
             return senhorios.Contains(senhorio);
         }
 
+        // Autentica um senhorio com base no NIF e senha
         public bool AutenticarSenhorio(string nif, string password)
         {
             foreach (var senhorio in senhorios)
@@ -38,11 +40,13 @@ namespace TP_POO_R.Models
             return false;
         }
 
+        // Obtém a lista de senhorios
         public List<Senhorio> ObterSenhorios()
         {
             return senhorios;
         }
 
+        // Salva a lista de senhorios no arquivo JSON
         public void SalvarSenhorios()
         {
             var options = new JsonSerializerOptions
@@ -54,6 +58,7 @@ namespace TP_POO_R.Models
             File.WriteAllText(filePath, jsonString);
         }
 
+        // Carrega a lista de senhorios do arquivo JSON
         public void CarregarSenhorios()
         {
             senhorios.Clear(); // Limpar a lista antes de recarregar

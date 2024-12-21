@@ -1,11 +1,8 @@
 ﻿using MaterialSkin.Controls;
-using MaterialSkin;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace TP_POO_R.ViewsAdicionar
 {
-    partial class AddDespesa : MaterialForm
+    partial class AddDespesaForm
     {
         private System.ComponentModel.IContainer components = null;
         private ComboBox cmbInquilinos;
@@ -26,6 +23,7 @@ namespace TP_POO_R.ViewsAdicionar
             base.Dispose(disposing);
         }
 
+        #region Windows Form Designer generated code
         private void InitializeComponent()
         {
             cmbInquilinos = new ComboBox();
@@ -50,21 +48,21 @@ namespace TP_POO_R.ViewsAdicionar
             dtpData.Location = new Point(99, 148);
             dtpData.Name = "dtpData";
             dtpData.Size = new Size(200, 23);
-            dtpData.TabIndex = 2;
+            dtpData.TabIndex = 1;
             // 
             // txtDescricao
             // 
             txtDescricao.Depth = 0;
             txtDescricao.Hint = "Descrição";
             txtDescricao.Location = new Point(99, 177);
-            txtDescricao.MouseState = MouseState.HOVER;
+            txtDescricao.MouseState = MaterialSkin.MouseState.HOVER;
             txtDescricao.Name = "txtDescricao";
             txtDescricao.PasswordChar = '\0';
             txtDescricao.SelectedText = "";
             txtDescricao.SelectionLength = 0;
             txtDescricao.SelectionStart = 0;
             txtDescricao.Size = new Size(200, 23);
-            txtDescricao.TabIndex = 3;
+            txtDescricao.TabIndex = 2;
             txtDescricao.UseSystemPasswordChar = false;
             // 
             // txtValorLuz
@@ -72,14 +70,14 @@ namespace TP_POO_R.ViewsAdicionar
             txtValorLuz.Depth = 0;
             txtValorLuz.Hint = "Valor Luz";
             txtValorLuz.Location = new Point(99, 206);
-            txtValorLuz.MouseState = MouseState.HOVER;
+            txtValorLuz.MouseState = MaterialSkin.MouseState.HOVER;
             txtValorLuz.Name = "txtValorLuz";
             txtValorLuz.PasswordChar = '\0';
             txtValorLuz.SelectedText = "";
             txtValorLuz.SelectionLength = 0;
             txtValorLuz.SelectionStart = 0;
             txtValorLuz.Size = new Size(200, 23);
-            txtValorLuz.TabIndex = 4;
+            txtValorLuz.TabIndex = 3;
             txtValorLuz.UseSystemPasswordChar = false;
             // 
             // txtValorGas
@@ -87,14 +85,14 @@ namespace TP_POO_R.ViewsAdicionar
             txtValorGas.Depth = 0;
             txtValorGas.Hint = "Valor Gás";
             txtValorGas.Location = new Point(99, 235);
-            txtValorGas.MouseState = MouseState.HOVER;
+            txtValorGas.MouseState = MaterialSkin.MouseState.HOVER;
             txtValorGas.Name = "txtValorGas";
             txtValorGas.PasswordChar = '\0';
             txtValorGas.SelectedText = "";
             txtValorGas.SelectionLength = 0;
             txtValorGas.SelectionStart = 0;
             txtValorGas.Size = new Size(200, 23);
-            txtValorGas.TabIndex = 5;
+            txtValorGas.TabIndex = 4;
             txtValorGas.UseSystemPasswordChar = false;
             // 
             // txtValorAgua
@@ -102,25 +100,25 @@ namespace TP_POO_R.ViewsAdicionar
             txtValorAgua.Depth = 0;
             txtValorAgua.Hint = "Valor Água";
             txtValorAgua.Location = new Point(99, 264);
-            txtValorAgua.MouseState = MouseState.HOVER;
+            txtValorAgua.MouseState = MaterialSkin.MouseState.HOVER;
             txtValorAgua.Name = "txtValorAgua";
             txtValorAgua.PasswordChar = '\0';
             txtValorAgua.SelectedText = "";
             txtValorAgua.SelectionLength = 0;
             txtValorAgua.SelectionStart = 0;
             txtValorAgua.Size = new Size(200, 23);
-            txtValorAgua.TabIndex = 6;
+            txtValorAgua.TabIndex = 5;
             txtValorAgua.UseSystemPasswordChar = false;
             // 
             // btnSalvar
             // 
             btnSalvar.Depth = 0;
             btnSalvar.Location = new Point(90, 308);
-            btnSalvar.MouseState = MouseState.HOVER;
+            btnSalvar.MouseState = MaterialSkin.MouseState.HOVER;
             btnSalvar.Name = "btnSalvar";
             btnSalvar.Primary = true;
             btnSalvar.Size = new Size(75, 23);
-            btnSalvar.TabIndex = 2;
+            btnSalvar.TabIndex = 6;
             btnSalvar.Text = "Salvar";
             btnSalvar.UseVisualStyleBackColor = true;
             btnSalvar.Click += btnSalvar_Click;
@@ -129,16 +127,16 @@ namespace TP_POO_R.ViewsAdicionar
             // 
             btnCancelar.Depth = 0;
             btnCancelar.Location = new Point(212, 308);
-            btnCancelar.MouseState = MouseState.HOVER;
+            btnCancelar.MouseState = MaterialSkin.MouseState.HOVER;
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Primary = true;
             btnCancelar.Size = new Size(75, 23);
-            btnCancelar.TabIndex = 3;
+            btnCancelar.TabIndex = 7;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = true;
             btnCancelar.Click += btnCancelar_Click;
             // 
-            // AddDespesa
+            // AddDespesaForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -151,9 +149,10 @@ namespace TP_POO_R.ViewsAdicionar
             Controls.Add(txtDescricao);
             Controls.Add(dtpData);
             Controls.Add(cmbInquilinos);
-            Name = "AddDespesa";
+            Name = "AddDespesaForm";
             Text = "Adicionar Despesa";
             ResumeLayout(false);
         }
+        #endregion
     }
 }

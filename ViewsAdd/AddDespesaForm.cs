@@ -1,23 +1,27 @@
 ﻿using MaterialSkin.Controls;
-using TP_POO_R.Models;
 using TP_POO_R.Controllers;
+using TP_POO_R.Models;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
 namespace TP_POO_R.ViewsAdicionar
 {
-    public partial class AddDespesa : MaterialForm
+    public partial class AddDespesaForm : MaterialForm
     {
-        public Despesa? NovaDespesa { get; private set; } // Tornar anulável
-        private InquilinoController _inquilinoController;
+        // Propriedade para armazenar a nova despesa, pode ser nula
+        public Despesa? NovaDespesa { get; private set; }
+        private readonly InquilinoController _inquilinoController;
 
-        public AddDespesa()
+        // Construtor que aceita um InquilinoController como argumento
+        public AddDespesaForm(InquilinoController inquilinoController)
         {
             InitializeComponent();
-            _inquilinoController = new InquilinoController();
-            LoadInquilinos();
+            _inquilinoController = inquilinoController;
+            LoadInquilinos(); // Carrega a lista de inquilinos
         }
 
+        // Carrega a lista de inquilinos no ComboBox
         private void LoadInquilinos()
         {
             var inquilinos = _inquilinoController.GetInquilinos()
@@ -30,27 +34,42 @@ namespace TP_POO_R.ViewsAdicionar
             }
 
             cmbInquilinos.DataSource = inquilinos;
-            cmbInquilinos.DisplayMember = "Id";
+            cmbInquilinos.DisplayMember = "Nome";
             cmbInquilinos.ValueMember = "Id";
         }
 
+        // Evento disparado ao clicar no botão de salvar
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             try
             {
-                // Criar uma nova instância de Despesa com os dados do formulário
-                NovaDespesa = new Despesa
+                if (cmbInquilinos.SelectedValue == null)
                 {
-                    IdInquilino = (int?)(cmbInquilinos.SelectedValue as int?) ?? 0,
-                    Data = dtpData.Value,
-                    Descricao = txtDescricao.Text,
-                    ValorLuz = decimal.Parse(txtValorLuz.Text),
-                    ValorGas = decimal.Parse(txtValorGas.Text),
-                    ValorAgua = decimal.Parse(txtValorAgua.Text)
-                };
+                    MessageBox.Show("Por favor, selecione um inquilino.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var idInquilino = (int)cmbInquilinos.SelectedValue;
+
+                // Cria uma nova instância de Despesa com os dados do formulário
+                NovaDespesa = Despesa.CriarDespesa(
+                    idInquilino,
+                    dtpData.Value,
+                    txtDescricao.Text,
+                    decimal.Parse(txtValorLuz.Text),
+                    decimal.Parse(txtValorGas.Text),
+                    decimal.Parse(txtValorAgua.Text)
+                );
+
+                // Valida a despesa
+                if (!NovaDespesa.Validar())
+                {
+                    MessageBox.Show("Dados da despesa inválidos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 this.DialogResult = DialogResult.OK;
-                this.Close();
+                this.Close(); // Fecha o formulário
             }
             catch (FormatException)
             {
@@ -58,10 +77,12 @@ namespace TP_POO_R.ViewsAdicionar
             }
         }
 
+        // Evento disparado ao clicar no botão de cancelar
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            this.Close(); // Fecha o formulário
         }
     }
 }
+

@@ -1,17 +1,21 @@
 ﻿using System.Text.Json;
-using TP_POO_R.Models;
+using TP_POO_R.Models; // Certifique-se de que este namespace está correto
+using System.IO;
+using System;
+using System.Collections.Generic;
 
 namespace TP_POO_R.Controllers
 {
     public class ImovelController
     {
-        private readonly string _filePath;
+        private readonly string _filePath; // Caminho do arquivo JSON
 
         public ImovelController()
         {
             _filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "imoveis.json");
         }
 
+        // Carrega os imóveis do arquivo JSON
         public List<Imovel> CarregarImoveis()
         {
             if (File.Exists(_filePath))
@@ -32,13 +36,14 @@ namespace TP_POO_R.Controllers
             return new List<Imovel>();
         }
 
+        // Salva os imóveis no arquivo JSON
         public void SalvarImoveis(List<Imovel> imoveis)
         {
             var json = JsonSerializer.Serialize(imoveis, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_filePath, json);
         }
 
-        // Adiciona o método ObterTodosImoveis que chama CarregarImoveis
+        // Método para obter todos os imóveis, chamando CarregarImoveis
         public List<Imovel> ObterTodosImoveis()
         {
             return CarregarImoveis();

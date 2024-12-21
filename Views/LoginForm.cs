@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-using TP_POO_R.Models;
+﻿using TP_POO_R.Models;
 
 namespace TP_POO_R.Views
 {
@@ -20,7 +18,6 @@ namespace TP_POO_R.Views
 
             if (senhorioController.AutenticarSenhorio(nif, password))
             {
-                MessageBox.Show("Login bem-sucedido!");
                 // Abrir o formulário principal da aplicação
                 MainForm mainForm = new MainForm();
                 mainForm.Show();
